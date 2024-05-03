@@ -1,10 +1,10 @@
-package com.creatmage.screen;
+package com.cratemage.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.creatmage.MyGdxGame;
+import com.cratemage.CrateMage;
 
 public class MenuScreen implements Screen {
 
@@ -16,7 +16,7 @@ public class MenuScreen implements Screen {
 	private static final int EXIT_BUTTON_HEIGHT = 100;
 
 
-	MyGdxGame game;
+	CrateMage game;
 
 	Texture exitButton;
 	Texture playButtonInactive;
@@ -24,7 +24,7 @@ public class MenuScreen implements Screen {
 	Texture exitButtonExit;
 
 
-	public MenuScreen(MyGdxGame game){
+	public MenuScreen(CrateMage game){
 		this.game = game;
 		playButtonActive = new Texture("play2.png");
 		playButtonInactive = new Texture("play1.png");
