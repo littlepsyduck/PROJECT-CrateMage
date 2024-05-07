@@ -95,6 +95,20 @@ public class GameScreen extends InputAdapter implements Screen {
 //            imgx=prevx;
 //        }
 
+        for (int i = 0; i < heightBlockAmount; i++) {
+            for (int j = 0; j < widthBlockAmount; j++) {
+                if (mapData[i][j] == 1) {
+                    stone_rect = new Rectangle(j * 16, i * 16, stone.getWidth(), stone.getHeight());
+                    if (img_rect.overlaps(stone_rect)) {
+                        // Nếu có va chạm, giữ nguyên vị trí cũ của nhân vật
+                        imgx = prevx;
+                        imgy = prevy;
+                    }
+                }
+            }
+        }
+
+
         if(Gdx.input.isKeyPressed(Input.Keys.W)||Gdx.input.isKeyPressed(Input.Keys.UP)){
             System.out.println("W");
             prevy = imgy;
@@ -102,13 +116,13 @@ public class GameScreen extends InputAdapter implements Screen {
             img = new Texture("6.png");
         }
         if(Gdx.input.isKeyPressed(Input.Keys.A)||Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-            System.out.println("A");
+      //      System.out.println("A");
             prevx = imgx;
             imgx-=Gdx.graphics.getDeltaTime()*Speed;
             img = new Texture("6.2.png");
         }
         if(Gdx.input.isKeyPressed(Input.Keys.S)||Gdx.input.isKeyPressed(Input.Keys.DOWN)){
-            System.out.println("S");
+       //     System.out.println("S");
             prevy = imgy;
             imgy-=Gdx.graphics.getDeltaTime()*Speed;
             img = new Texture("6.png");

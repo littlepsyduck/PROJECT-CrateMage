@@ -14,6 +14,7 @@ public class MyGdxGame extends Game {
 //		GameScreen = new GameScreen();
 //		setScreen(GameScreen);
 		batch = new SpriteBatch();
+
 		this.setScreen(new MenuScreen(this));
 	}
 

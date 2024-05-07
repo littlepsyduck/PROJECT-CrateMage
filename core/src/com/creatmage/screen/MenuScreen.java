@@ -8,95 +8,165 @@ import com.creatmage.MyGdxGame;
 
 public class MenuScreen implements Screen {
 
-	private static final int PLAY1_BUTTON_WIDTH = 200;
-	private static final int PLAY1_BUTTON_HEIGHT = 200;
-	private static final int PLAY2_BUTTON_WIDTH = 200;
-	private static final int PLAY2_BUTTON_HEIGHT = 200;
-	private static final int EXIT_BUTTON_WIDTH = 100;
-	private static final int EXIT_BUTTON_HEIGHT = 100;
+    private static final int PLAY1_BUTTON_WIDTH = 200;
+    private static final int PLAY1_BUTTON_HEIGHT = 70;
+    private static final int PLAY2_BUTTON_WIDTH = 200;
+    private static final int PLAY2_BUTTON_HEIGHT = 70;
+    private static final int NAME_BUTTON_WIDTH = 300;
+    private static final int NAME_BUTTON_HEIGHT = 300;
 
 
-	MyGdxGame game;
+    MyGdxGame game;
 
-	Texture exitButton;
-	Texture playButtonInactive;
-	Texture playButtonActive;
-	Texture exitButtonExit;
+    Texture namegame;
+    Texture exitButtonInactive;
+    Texture exitButtonActive;
+    Texture playButtonInactive;
+    Texture playButtonActive;
+    Texture continueButtonInactive;
+    Texture continueButtonActive;
+    Texture tutorialButtonInactive;
+    Texture tutorialButtonActive;
+
+    public MenuScreen(MyGdxGame game) {
+        this.game = game;
+        namegame = new Texture("namegame.png");
+        playButtonActive = new Texture("newgame.png");
+        playButtonInactive = new Texture("innewgame.png");
+        continueButtonActive= new Texture("continue.png");
+        continueButtonInactive = new Texture("incontinue.png");
+        tutorialButtonActive= new Texture("tutorial.png");
+        tutorialButtonInactive = new Texture("intutorial.png");
+        exitButtonActive= new Texture("exit.png");
+        exitButtonInactive = new Texture("inexit.png");
+    }
+
+    @Override
+    public void show() {
+
+    }
+
+    @Override
+    public void render(float v) {
+        Gdx.gl.glClearColor(1, 1, 1, 0);
+        ScreenUtils.clear(1, 1, 1, 0);
+
+        game.batch.begin();
+
+        //--- Draw BACKGR ---s
+        Texture background = new Texture("backgr.png");
+        game.batch.draw(background, 0, 0, 800, 450);
+        game.batch.draw(namegame,800-NAME_BUTTON_WIDTH-100,450-NAME_BUTTON_HEIGHT+10,NAME_BUTTON_WIDTH,NAME_BUTTON_HEIGHT);
+
+        //--- NEWGAME
+
+        int x = 200 - PLAY1_BUTTON_WIDTH / 2;
+        int y = 450 - PLAY1_BUTTON_HEIGHT * 2;
+
+        if (Gdx.input.getX() < x + PLAY1_BUTTON_WIDTH &&
+                Gdx.input.getX() > x &&
+                Gdx.input.getY() > Gdx.graphics.getHeight() - (y + PLAY1_BUTTON_HEIGHT) &&
+                Gdx.input.getY() < Gdx.graphics.getHeight() - y) {
+            game.batch.draw(playButtonActive, 200 - PLAY2_BUTTON_WIDTH / 2, y, PLAY2_BUTTON_WIDTH, PLAY2_BUTTON_HEIGHT);
+            if (Gdx.input.isTouched()) {
+                this.dispose();
+                game.setScreen(new GameScreen(game));
+            }
+        } else {
+            game.batch.draw(playButtonInactive, 200 - PLAY1_BUTTON_WIDTH / 2, y, PLAY1_BUTTON_WIDTH, PLAY1_BUTTON_HEIGHT);
+        }
 
 
-	public MenuScreen(MyGdxGame game){
-		this.game = game;
-		playButtonActive = new Texture("play2.png");
-		playButtonInactive = new Texture("play1.png");
-		exitButton = new Texture("pngtree-exit-close-button-for-game-user-interface-icon-png-image_4520638.png");
-		exitButtonExit = new Texture("DinoSprites_vita.gif");
-	}
+        //-- CONTINUE
 
-	@Override
-	public void show() {
+         x = 200 - PLAY1_BUTTON_WIDTH / 2;
+         y = 450 - PLAY1_BUTTON_HEIGHT * 2 - 80;
 
-	}
+        if (Gdx.input.getX() < x + PLAY1_BUTTON_WIDTH &&
+                Gdx.input.getX() > x &&
+                Gdx.input.getY() > Gdx.graphics.getHeight() - (y + PLAY1_BUTTON_HEIGHT) &&
+                Gdx.input.getY() < Gdx.graphics.getHeight() - y) {
+            game.batch.draw(continueButtonActive, 200 - PLAY2_BUTTON_WIDTH / 2, y, PLAY2_BUTTON_WIDTH, PLAY2_BUTTON_HEIGHT);
+            if (Gdx.input.isTouched()) {
+                this.dispose();
+                game.setScreen(new GameScreen(game));
+            }
+        } else {
+            game.batch.draw(continueButtonInactive, 200 - PLAY1_BUTTON_WIDTH / 2, y, PLAY1_BUTTON_WIDTH, PLAY1_BUTTON_HEIGHT);
+        }
 
-	@Override
-	public void render(float v) {
-		Gdx.gl.glClearColor(1, 1, 1, 0);
-		ScreenUtils.clear(1, 1, 1, 0);
+        //-- TUTORIAL
 
-		game.batch.begin();
+        x = 200 - PLAY1_BUTTON_WIDTH / 2;
+        y = 450 - PLAY1_BUTTON_HEIGHT * 2 - 160;
 
-		int x = 292 - PLAY1_BUTTON_WIDTH / 2;
-		int y = 272 - PLAY1_BUTTON_HEIGHT / 2;
-		if (Gdx.input.getX() < x + PLAY1_BUTTON_WIDTH && Gdx.input.getX() > x && Gdx.input.getY() < y + PLAY1_BUTTON_HEIGHT / 3 * 2 && Gdx.input.getY() > y) {
-			game.batch.draw(playButtonActive, 272 - PLAY2_BUTTON_WIDTH / 2, 240 - PLAY2_BUTTON_HEIGHT / 2, PLAY2_BUTTON_WIDTH, PLAY2_BUTTON_HEIGHT);
-			if (Gdx.input.isTouched()) {
-				this.dispose();
-				game.setScreen(new GameScreen(game));
-			}
-		} else {
-			game.batch.draw(playButtonInactive, 272 - PLAY1_BUTTON_WIDTH / 2, 240 - PLAY1_BUTTON_HEIGHT / 2, PLAY1_BUTTON_WIDTH, PLAY1_BUTTON_HEIGHT);
-		}
+        if (Gdx.input.getX() < x + PLAY1_BUTTON_WIDTH &&
+                Gdx.input.getX() > x &&
+                Gdx.input.getY() > Gdx.graphics.getHeight() - (y + PLAY1_BUTTON_HEIGHT) &&
+                Gdx.input.getY() < Gdx.graphics.getHeight() - y) {
+            game.batch.draw(tutorialButtonActive, 200 - PLAY2_BUTTON_WIDTH / 2, y, PLAY2_BUTTON_WIDTH, PLAY2_BUTTON_HEIGHT);
+            if (Gdx.input.isTouched()) {
+                this.dispose();
+                game.setScreen(new GameScreen(game));
+            }
+        } else {
+            game.batch.draw(tutorialButtonInactive, 200 - PLAY1_BUTTON_WIDTH / 2, y, PLAY1_BUTTON_WIDTH, PLAY1_BUTTON_HEIGHT);
+        }
+
+        x = 200 - PLAY1_BUTTON_WIDTH / 2;
+        y = 450 - PLAY1_BUTTON_HEIGHT * 2 - 240;
+        if (Gdx.input.getX() < x + PLAY1_BUTTON_WIDTH &&
+                Gdx.input.getX() > x &&
+                Gdx.input.getY() > Gdx.graphics.getHeight() - (y + PLAY1_BUTTON_HEIGHT) &&
+                Gdx.input.getY() < Gdx.graphics.getHeight() - y) {
+            game.batch.draw(exitButtonActive, 200 - PLAY2_BUTTON_WIDTH / 2, y, PLAY2_BUTTON_WIDTH, PLAY2_BUTTON_HEIGHT);
+            if (Gdx.input.isTouched()) {
+                Gdx.app.exit();
+                game.setScreen(new GameScreen(game));
+            }
+        } else {
+            game.batch.draw(exitButtonInactive, 200 - PLAY1_BUTTON_WIDTH / 2, y, PLAY1_BUTTON_WIDTH, PLAY1_BUTTON_HEIGHT);
+        }
+
+//
+//		if(Gdx.input.getX()<x + EXIT_BUTTON_WIDTH && Gdx.input.getX()> x && Gdx.input.getY()<y + EXIT_BUTTON_HEIGHT*2 && Gdx.input.getY()> y+ EXIT_BUTTON_HEIGHT ){
+//			game.batch.draw(exitButton, 500 - EXIT_BUTTON_WIDTH / 2, 240 - EXIT_BUTTON_HEIGHT * 2, EXIT_BUTTON_WIDTH, EXIT_BUTTON_HEIGHT);
+//			if (Gdx.input.isTouched()) {
+//				Gdx.app.exit();
+//			}
+//		} else {
+//			game.batch.draw(exitButtonExit, 272 - EXIT_BUTTON_WIDTH / 2, 240 - EXIT_BUTTON_HEIGHT * 2, EXIT_BUTTON_WIDTH, EXIT_BUTTON_HEIGHT);
+//		}
 
 
-		x= 292 - EXIT_BUTTON_WIDTH  / 2;
-		y = 272 - EXIT_BUTTON_HEIGHT / 2;
+        game.batch.end();
+    }
 
-		if(Gdx.input.getX()<x + EXIT_BUTTON_WIDTH && Gdx.input.getX()> x && Gdx.input.getY()<y + EXIT_BUTTON_HEIGHT*2 && Gdx.input.getY()> y+ EXIT_BUTTON_HEIGHT ){
-			game.batch.draw(exitButton, 272 - EXIT_BUTTON_WIDTH / 2, 240 - EXIT_BUTTON_HEIGHT * 2, EXIT_BUTTON_WIDTH, EXIT_BUTTON_HEIGHT);
-			if (Gdx.input.isTouched()) {
-				Gdx.app.exit();
-			}
-		} else {
-			game.batch.draw(exitButtonExit, 272 - EXIT_BUTTON_WIDTH / 2, 240 - EXIT_BUTTON_HEIGHT * 2, EXIT_BUTTON_WIDTH, EXIT_BUTTON_HEIGHT);
-		}
+    @Override
+    public void resize(int i, int i1) {
 
+    }
 
-		game.batch.end();
-	}
+    @Override
+    public void pause() {
 
-	@Override
-	public void resize(int i, int i1) {
+    }
 
-	}
+    @Override
+    public void resume() {
 
-	@Override
-	public void pause() {
+    }
 
-	}
+    @Override
+    public void hide() {
 
-	@Override
-	public void resume() {
+    }
 
-	}
-
-	@Override
-	public void hide() {
-
-	}
-
-	@Override
-	public void dispose() {
-		playButtonActive.dispose();
-		playButtonInactive.dispose();
-		exitButton.dispose();
-	}
+    @Override
+    public void dispose() {
+        playButtonActive.dispose();
+       // playButtonInactive.dispose();
+        exitButtonActive.dispose();
+       // exitButtonInactive.dispose();
+    }
 }
