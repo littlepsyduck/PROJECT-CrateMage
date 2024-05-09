@@ -3,8 +3,10 @@ package com.creatmage.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.creatmage.MyGdxGame;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 
 public class MenuScreen implements Screen {
 
@@ -14,7 +16,7 @@ public class MenuScreen implements Screen {
     private static final int PLAY2_BUTTON_HEIGHT = 70;
     private static final int NAME_BUTTON_WIDTH = 300;
     private static final int NAME_BUTTON_HEIGHT = 300;
-
+    private OrthographicCamera camera;
 
     MyGdxGame game;
 
@@ -43,7 +45,9 @@ public class MenuScreen implements Screen {
 
     @Override
     public void show() {
-
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        camera.update();
     }
 
     @Override
@@ -63,10 +67,13 @@ public class MenuScreen implements Screen {
         int x = 200 - PLAY1_BUTTON_WIDTH / 2;
         int y = 450 - PLAY1_BUTTON_HEIGHT * 2;
 
-        if (Gdx.input.getX() < x + PLAY1_BUTTON_WIDTH &&
-                Gdx.input.getX() > x &&
-                Gdx.input.getY() > Gdx.graphics.getHeight() - (y + PLAY1_BUTTON_HEIGHT) &&
-                Gdx.input.getY() < Gdx.graphics.getHeight() - y) {
+        Vector3 touchPoint = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+        camera.unproject(touchPoint); // Chuyen đoi toạ độ
+
+        if (touchPoint.x < x + PLAY1_BUTTON_WIDTH &&
+                touchPoint.x > x &&
+                touchPoint.y > y &&
+                touchPoint.y < y + PLAY1_BUTTON_HEIGHT) {
             game.batch.draw(playButtonActive, 200 - PLAY2_BUTTON_WIDTH / 2, y, PLAY2_BUTTON_WIDTH, PLAY2_BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
                 this.dispose();
@@ -77,15 +84,16 @@ public class MenuScreen implements Screen {
         }
 
 
+
         //-- CONTINUE
 
          x = 200 - PLAY1_BUTTON_WIDTH / 2;
          y = 450 - PLAY1_BUTTON_HEIGHT * 2 - 80;
 
-        if (Gdx.input.getX() < x + PLAY1_BUTTON_WIDTH &&
-                Gdx.input.getX() > x &&
-                Gdx.input.getY() > Gdx.graphics.getHeight() - (y + PLAY1_BUTTON_HEIGHT) &&
-                Gdx.input.getY() < Gdx.graphics.getHeight() - y) {
+        if (touchPoint.x < x + PLAY1_BUTTON_WIDTH &&
+                touchPoint.x > x &&
+                touchPoint.y > y &&
+                touchPoint.y < y + PLAY1_BUTTON_HEIGHT) {
             game.batch.draw(continueButtonActive, 200 - PLAY2_BUTTON_WIDTH / 2, y, PLAY2_BUTTON_WIDTH, PLAY2_BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
                 this.dispose();
@@ -99,11 +107,10 @@ public class MenuScreen implements Screen {
 
         x = 200 - PLAY1_BUTTON_WIDTH / 2;
         y = 450 - PLAY1_BUTTON_HEIGHT * 2 - 160;
-
-        if (Gdx.input.getX() < x + PLAY1_BUTTON_WIDTH &&
-                Gdx.input.getX() > x &&
-                Gdx.input.getY() > Gdx.graphics.getHeight() - (y + PLAY1_BUTTON_HEIGHT) &&
-                Gdx.input.getY() < Gdx.graphics.getHeight() - y) {
+        if (touchPoint.x < x + PLAY1_BUTTON_WIDTH &&
+                touchPoint.x > x &&
+                touchPoint.y > y &&
+                touchPoint.y < y + PLAY1_BUTTON_HEIGHT) {
             game.batch.draw(tutorialButtonActive, 200 - PLAY2_BUTTON_WIDTH / 2, y, PLAY2_BUTTON_WIDTH, PLAY2_BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
                 this.dispose();
@@ -115,10 +122,10 @@ public class MenuScreen implements Screen {
 
         x = 200 - PLAY1_BUTTON_WIDTH / 2;
         y = 450 - PLAY1_BUTTON_HEIGHT * 2 - 240;
-        if (Gdx.input.getX() < x + PLAY1_BUTTON_WIDTH &&
-                Gdx.input.getX() > x &&
-                Gdx.input.getY() > Gdx.graphics.getHeight() - (y + PLAY1_BUTTON_HEIGHT) &&
-                Gdx.input.getY() < Gdx.graphics.getHeight() - y) {
+        if (touchPoint.x < x + PLAY1_BUTTON_WIDTH &&
+                touchPoint.x > x &&
+                touchPoint.y > y &&
+                touchPoint.y < y + PLAY1_BUTTON_HEIGHT) {
             game.batch.draw(exitButtonActive, 200 - PLAY2_BUTTON_WIDTH / 2, y, PLAY2_BUTTON_WIDTH, PLAY2_BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
                 Gdx.app.exit();
@@ -128,15 +135,7 @@ public class MenuScreen implements Screen {
             game.batch.draw(exitButtonInactive, 200 - PLAY1_BUTTON_WIDTH / 2, y, PLAY1_BUTTON_WIDTH, PLAY1_BUTTON_HEIGHT);
         }
 
-//
-//		if(Gdx.input.getX()<x + EXIT_BUTTON_WIDTH && Gdx.input.getX()> x && Gdx.input.getY()<y + EXIT_BUTTON_HEIGHT*2 && Gdx.input.getY()> y+ EXIT_BUTTON_HEIGHT ){
-//			game.batch.draw(exitButton, 500 - EXIT_BUTTON_WIDTH / 2, 240 - EXIT_BUTTON_HEIGHT * 2, EXIT_BUTTON_WIDTH, EXIT_BUTTON_HEIGHT);
-//			if (Gdx.input.isTouched()) {
-//				Gdx.app.exit();
-//			}
-//		} else {
-//			game.batch.draw(exitButtonExit, 272 - EXIT_BUTTON_WIDTH / 2, 240 - EXIT_BUTTON_HEIGHT * 2, EXIT_BUTTON_WIDTH, EXIT_BUTTON_HEIGHT);
-//		}
+
 
 
         game.batch.end();
