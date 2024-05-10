@@ -113,7 +113,7 @@ public class MenuScreen implements Screen {
             game.batch.draw(tutorialButtonActive, x, y, PLAY2_BUTTON_WIDTH, PLAY2_BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
                 this.dispose();
-                game.setScreen(new GameScreen(game));
+                game.setScreen(new TutorialScreen(game));
             }
         } else {
             game.batch.draw(tutorialButtonInactive, x, y, PLAY1_BUTTON_WIDTH, PLAY1_BUTTON_HEIGHT);
@@ -162,9 +162,9 @@ public class MenuScreen implements Screen {
 
     @Override
     public void dispose() {
-        playButtonActive.dispose();
-       // playButtonInactive.dispose();
-        exitButtonActive.dispose();
-       // exitButtonInactive.dispose();
+//        playButtonActive.dispose();
+//       // playButtonInactive.dispose();
+//        exitButtonActive.dispose();
+//       // exitButtonInactive.dispose();
     }
 }
