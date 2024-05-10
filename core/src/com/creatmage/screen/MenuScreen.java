@@ -10,12 +10,12 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 
 public class MenuScreen implements Screen {
 
-    private static final int PLAY1_BUTTON_WIDTH = 200;
-    private static final int PLAY1_BUTTON_HEIGHT = 70;
-    private static final int PLAY2_BUTTON_WIDTH = 200;
-    private static final int PLAY2_BUTTON_HEIGHT = 70;
-    private static final int NAME_BUTTON_WIDTH = 300;
-    private static final int NAME_BUTTON_HEIGHT = 300;
+    private static final int PLAY1_BUTTON_WIDTH = 360;
+    private static final int PLAY1_BUTTON_HEIGHT = 120;
+    private static final int PLAY2_BUTTON_WIDTH = 360;
+    private static final int PLAY2_BUTTON_HEIGHT = 120;
+    private static final int NAME_BUTTON_WIDTH = 500;
+    private static final int NAME_BUTTON_HEIGHT = 500;
     private OrthographicCamera camera;
 
     MyGdxGame game;
@@ -59,13 +59,13 @@ public class MenuScreen implements Screen {
 
         //--- Draw BACKGR ---s
         Texture background = new Texture("backgr.png");
-        game.batch.draw(background, 0, 0, 800, 450);
-        game.batch.draw(namegame,800-NAME_BUTTON_WIDTH-100,450-NAME_BUTTON_HEIGHT+10,NAME_BUTTON_WIDTH,NAME_BUTTON_HEIGHT);
+        game.batch.draw(background, 0, 0, 1280, 720);
+        game.batch.draw(namegame,1280-NAME_BUTTON_WIDTH-100,720-NAME_BUTTON_HEIGHT+10,NAME_BUTTON_WIDTH,NAME_BUTTON_HEIGHT);
 
         //--- NEWGAME
 
-        int x = 200 - PLAY1_BUTTON_WIDTH / 2;
-        int y = 450 - PLAY1_BUTTON_HEIGHT * 2;
+        int x = 720/4-100;
+        int y = 720-90-PLAY1_BUTTON_HEIGHT;  //720-480-(3*20)
 
         Vector3 touchPoint = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
         camera.unproject(touchPoint); // Chuyen đoi toạ độ
@@ -74,65 +74,64 @@ public class MenuScreen implements Screen {
                 touchPoint.x > x &&
                 touchPoint.y > y &&
                 touchPoint.y < y + PLAY1_BUTTON_HEIGHT) {
-            game.batch.draw(playButtonActive, 200 - PLAY2_BUTTON_WIDTH / 2, y, PLAY2_BUTTON_WIDTH, PLAY2_BUTTON_HEIGHT);
+            game.batch.draw(playButtonActive, x, y, PLAY2_BUTTON_WIDTH, PLAY2_BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
                 this.dispose();
                 game.setScreen(new GameScreen(game));
             }
         } else {
-            game.batch.draw(playButtonInactive, 200 - PLAY1_BUTTON_WIDTH / 2, y, PLAY1_BUTTON_WIDTH, PLAY1_BUTTON_HEIGHT);
+            game.batch.draw(playButtonInactive, x, y, PLAY1_BUTTON_WIDTH, PLAY1_BUTTON_HEIGHT);
         }
 
 
 
         //-- CONTINUE
 
-         x = 200 - PLAY1_BUTTON_WIDTH / 2;
-         y = 450 - PLAY1_BUTTON_HEIGHT * 2 - 80;
+        // x = 1720/4-100;
+        y = 720-90-PLAY1_BUTTON_HEIGHT*2-20;
 
         if (touchPoint.x < x + PLAY1_BUTTON_WIDTH &&
                 touchPoint.x > x &&
                 touchPoint.y > y &&
                 touchPoint.y < y + PLAY1_BUTTON_HEIGHT) {
-            game.batch.draw(continueButtonActive, 200 - PLAY2_BUTTON_WIDTH / 2, y, PLAY2_BUTTON_WIDTH, PLAY2_BUTTON_HEIGHT);
+            game.batch.draw(continueButtonActive, x, y, PLAY2_BUTTON_WIDTH, PLAY2_BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
                 this.dispose();
                 game.setScreen(new GameScreen(game));
             }
         } else {
-            game.batch.draw(continueButtonInactive, 200 - PLAY1_BUTTON_WIDTH / 2, y, PLAY1_BUTTON_WIDTH, PLAY1_BUTTON_HEIGHT);
+            game.batch.draw(continueButtonInactive, x, y, PLAY1_BUTTON_WIDTH, PLAY1_BUTTON_HEIGHT);
         }
 
         //-- TUTORIAL
 
-        x = 200 - PLAY1_BUTTON_WIDTH / 2;
-        y = 450 - PLAY1_BUTTON_HEIGHT * 2 - 160;
+        y = 720-90-PLAY1_BUTTON_HEIGHT*3-20*2;
         if (touchPoint.x < x + PLAY1_BUTTON_WIDTH &&
                 touchPoint.x > x &&
                 touchPoint.y > y &&
                 touchPoint.y < y + PLAY1_BUTTON_HEIGHT) {
-            game.batch.draw(tutorialButtonActive, 200 - PLAY2_BUTTON_WIDTH / 2, y, PLAY2_BUTTON_WIDTH, PLAY2_BUTTON_HEIGHT);
+            game.batch.draw(tutorialButtonActive, x, y, PLAY2_BUTTON_WIDTH, PLAY2_BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
                 this.dispose();
                 game.setScreen(new GameScreen(game));
             }
         } else {
-            game.batch.draw(tutorialButtonInactive, 200 - PLAY1_BUTTON_WIDTH / 2, y, PLAY1_BUTTON_WIDTH, PLAY1_BUTTON_HEIGHT);
+            game.batch.draw(tutorialButtonInactive, x, y, PLAY1_BUTTON_WIDTH, PLAY1_BUTTON_HEIGHT);
         }
 
-        x = 200 - PLAY1_BUTTON_WIDTH / 2;
-        y = 450 - PLAY1_BUTTON_HEIGHT * 2 - 240;
+        // ----EXIT
+        y = 720-90-PLAY1_BUTTON_HEIGHT*4-20*3; // 20 la k/c cac button
         if (touchPoint.x < x + PLAY1_BUTTON_WIDTH &&
                 touchPoint.x > x &&
                 touchPoint.y > y &&
                 touchPoint.y < y + PLAY1_BUTTON_HEIGHT) {
-            game.batch.draw(exitButtonActive, 200 - PLAY2_BUTTON_WIDTH / 2, y, PLAY2_BUTTON_WIDTH, PLAY2_BUTTON_HEIGHT);
+            game.batch.draw(exitButtonActive, x, y, PLAY2_BUTTON_WIDTH, PLAY2_BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
                 Gdx.app.exit();
                 game.setScreen(new GameScreen(game));
             }
         } else {
-            game.batch.draw(exitButtonInactive, 200 - PLAY1_BUTTON_WIDTH / 2, y, PLAY1_BUTTON_WIDTH, PLAY1_BUTTON_HEIGHT);
+            game.batch.draw(exitButtonInactive, x, y, PLAY1_BUTTON_WIDTH, PLAY1_BUTTON_HEIGHT);
         }
 
 

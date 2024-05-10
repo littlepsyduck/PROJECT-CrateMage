@@ -9,7 +9,7 @@ public class DesktopLauncher {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
 		config.setTitle("CrateMage");
-		config.setWindowedMode(800, 450);
+		config.setWindowedMode(1280, 720);
 		new Lwjgl3Application(new MyGdxGame(), config);
 	}
 }
