@@ -1,12 +1,15 @@
-package com.creatmage;
+package com.cratemage;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.creatmage.screen.GameScreen;
-import com.creatmage.screen.MenuScreen;
+import com.cratemage.screen.MenuScreen;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
-public class MyGdxGame extends Game {
+public class Main extends Game {
 	public SpriteBatch batch;
+	public BitmapFont font;
+	public OrthographicCamera camera;
 	//public Screen GameScreen;
 
 	@Override
@@ -14,7 +17,7 @@ public class MyGdxGame extends Game {
 //		GameScreen = new GameScreen();
 //		setScreen(GameScreen);
 		batch = new SpriteBatch();
-
+		font = new BitmapFont();
 		this.setScreen(new MenuScreen(this));
 	}
 
