@@ -32,15 +32,15 @@ public class MenuScreen implements Screen {
 
     public MenuScreen(MyGdxGame game) {
         this.game = game;
-        namegame = new Texture("namegame.png");
-        playButtonActive = new Texture("newgame.png");
-        playButtonInactive = new Texture("innewgame.png");
-        continueButtonActive= new Texture("continue.png");
-        continueButtonInactive = new Texture("incontinue.png");
-        tutorialButtonActive= new Texture("tutorial.png");
-        tutorialButtonInactive = new Texture("intutorial.png");
-        exitButtonActive= new Texture("exit.png");
-        exitButtonInactive = new Texture("inexit.png");
+        namegame = new Texture("Menu/namegame.png");
+        playButtonActive = new Texture("Menu/newgame.png");
+        playButtonInactive = new Texture("Menu/innewgame.png");
+        continueButtonActive= new Texture("Menu/continue.png");
+        continueButtonInactive = new Texture("Menu/incontinue.png");
+        tutorialButtonActive= new Texture("Menu/tutorial.png");
+        tutorialButtonInactive = new Texture("Menu/intutorial.png");
+        exitButtonActive= new Texture("Menu/exit.png");
+        exitButtonInactive = new Texture("Menu/inexit.png");
     }
 
     @Override
@@ -58,7 +58,7 @@ public class MenuScreen implements Screen {
         game.batch.begin();
 
         //--- Draw BACKGR ---s
-        Texture background = new Texture("backgr.png");
+        Texture background = new Texture("Menu/backgr.png");
         game.batch.draw(background, 0, 0, 1280, 720);
         game.batch.draw(namegame,1280-NAME_BUTTON_WIDTH-100,720-NAME_BUTTON_HEIGHT+10,NAME_BUTTON_WIDTH,NAME_BUTTON_HEIGHT);
 

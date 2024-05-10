@@ -24,9 +24,9 @@ public class TutorialScreen implements Screen {
 
     public TutorialScreen(MyGdxGame game) {
         this.game = game;
-        tutorialBackground = new Texture("backgr_tutorial.png");
-        homeButtonActive = new Texture("home.png");
-        homeButtonInactive = new Texture("inhome.png");
+        tutorialBackground = new Texture("Tutorial/backgr_tutorial.png");
+        homeButtonActive = new Texture("Tutorial/home.png");
+        homeButtonInactive = new Texture("Tutorial/inhome.png");
     }
 
     @Override
