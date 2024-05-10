@@ -5,10 +5,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.creatmage.MyGdxGame;
 
@@ -44,6 +47,13 @@ public class LevelSelectScreen extends ApplicationAdapter implements Screen {
         buttons[8] = new Button(skin, "level8");
         buttons[9] = new Button(skin, "level9");
         buttons[10] = new Button(skin, "level10");
+
+        buttons[1].addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                game.setScreen(new GameScreen(game));
+            }
+        });
 
         for(int i = 1; i <= 5; i++){
             table.add(buttons[i]).pad(50);
