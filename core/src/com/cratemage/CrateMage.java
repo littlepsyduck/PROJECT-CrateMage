@@ -1,11 +1,10 @@
-package com.creatmage;
+package com.cratemage;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.creatmage.screen.GameScreen;
-import com.creatmage.screen.MenuScreen;
+import com.cratemage.screen.MenuScreen;
 
-public class MyGdxGame extends Game {
+public class CrateMage extends Game {
 	public SpriteBatch batch;
 	//public Screen GameScreen;
 

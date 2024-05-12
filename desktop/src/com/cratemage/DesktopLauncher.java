@@ -1,8 +1,7 @@
-package com.creatmage;
+package com.cratemage;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.creatmage.MyGdxGame;
 
 public class DesktopLauncher {
 	public static void main(String[] arg) {
@@ -10,7 +9,7 @@ public class DesktopLauncher {
 		config.setForegroundFPS(60);
 		config.setTitle("CrateMage");
 		config.setWindowedMode(1280, 720);
-		new Lwjgl3Application(new MyGdxGame(), config);
+		new Lwjgl3Application(new CrateMage(), config);
 	}
 }
 
