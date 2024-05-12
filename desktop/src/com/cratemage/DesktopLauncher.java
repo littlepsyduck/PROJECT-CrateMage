@@ -12,4 +12,3 @@ public class DesktopLauncher {
 		new Lwjgl3Application(new CrateMage(), config);
 	}
 }
-

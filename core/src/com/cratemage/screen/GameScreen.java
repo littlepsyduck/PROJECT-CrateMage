@@ -1,174 +1,100 @@
 package com.cratemage.screen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.World;
 import com.cratemage.CrateMage;
+import com.cratemage.controller.TileMapHelper;
+import com.cratemage.model.Player;
 
-public class GameScreen extends InputAdapter implements Screen {
-    Stage stage;
+import static com.cratemage.common.constant.GameConstant.PPM;
 
-    Texture img;
-    Texture stone;
-    public static final float SPEED = 75.0f;
+public class GameScreen implements Screen {
+    public float stateTime;
+    public CrateMage game;
+    public World world;
+    public Player player;
+    public TileMapHelper tileMapHelper;
+    public TiledMap map = new TmxMapLoader().load("map/Map1.tmx");
+    public OrthogonalTiledMapRenderer renderer;
+    public Box2DDebugRenderer box2DDebugRenderer;
+    public OrthographicCamera staticCamera;
+    public OrthographicCamera playerCamera;
 
-    public static final float CHAR_ANIMATION_SPEED = 0.2f;
-    public static final int CHAR_WIDTH = 24;
-    public static final int CHAR_HEIGHT = 24;
-
-    float imgx, imgy;
-
-    int roll;
-    Animation[] rolls;
-    float stateTime;
-
-    int heightBlockAmount = 480/16;
-    int widthBlockAmount = 592/16;
-
-    Rectangle img_rect;
-    Rectangle stone_rect;
-    float prevx, prevy;
-
-    CrateMage game;
-
+    public int[] Ground = new int[] {0}, Layer1 = new int[]{1}, Layer2 = new int[]{2}, Layer3 = new int[]{4}, Layer4 = new int[5]; // Lấy index của layer
     public GameScreen(CrateMage game){
+        this.world = new World(new Vector2(0,0), false);
         this.game = game;
-        imgx=16;
-        imgy=16;
-
-        roll = 0;
-        rolls = new Animation[1];
-        img = new Texture("still.png");
-        TextureRegion[][] rollSpriteSheet =TextureRegion.split(img, 24,24);
-
-        rolls[roll] = new Animation(CHAR_ANIMATION_SPEED, rollSpriteSheet[0]);
-
-        stone = new Texture("stone.png");
-
-        stage = new Stage();
-
-        //img_rect = new Rectangle((int) imgx, (int) imgy,img.getWidth(),img.getHeight());
-
-        Gdx.input.setInputProcessor(stage);
-        prevx=0;
-        prevy=0;
+        this.box2DDebugRenderer = new Box2DDebugRenderer();
+        box2DDebugRenderer.setDrawBodies(false);
+        box2DDebugRenderer.setDrawJoints(false);
+        this.tileMapHelper = new TileMapHelper(this);
+        this.renderer = tileMapHelper.setupMap();
 
     }
-
     @Override
     public void show() {
+//        staticCamera = new OrthographicCamera(512, 360);
+        game.camera = new OrthographicCamera(512, 360);
 
     }
+    public void update(float dt){
+        world.step(1/60f, 6, 2);
 
-    int[][] mapData = {
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, // Example map data (replace with your actual data)
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-
-            // ... and so on for all rows
-    };
+        Vector3 position = game.camera.position;
+        position.x = player.body.getPosition().x * PPM * 10 / 10f;
+        position.y = player.body.getPosition().y * PPM * 10 / 10f;
+        game.camera.position.set(position);
+//        staticCamera.position.set(position);
+        if (game.camera.position.x < game.camera.viewportWidth / 2) {
+            game.camera.position.x = game.camera.viewportWidth / 2;
+        }
+        if (game.camera.position.x > map.getProperties().get("width", Integer.class) * map.getProperties().get("tilewidth", Integer.class) - game.camera.viewportWidth / 2) {
+            game.camera.position.x = map.getProperties().get("width", Integer.class) * map.getProperties().get("tilewidth", Integer.class) - game.camera.viewportWidth / 2;
+        }
+        if (game.camera.position.y < game.camera.viewportHeight / 2) {
+            game.camera.position.y = game.camera.viewportHeight / 2;
+        }
+        if (game.camera.position.y > map.getProperties().get("height", Integer.class) * map.getProperties().get("tileheight", Integer.class) - game.camera.viewportHeight / 2) {
+            game.camera.position.y = map.getProperties().get("height", Integer.class) * map.getProperties().get("tileheight", Integer.class) - game.camera.viewportHeight / 2;
+        }
+        player.update(dt);
+        game.camera.update();
+//        staticCamera.update();
+    }
 
     @Override
-    public void render(float v) {
-        Gdx.gl.glClearColor(1,1,1,0);
-        ScreenUtils.clear(1,1,1,0);
+    public void render(float delta) {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        renderer.setView(game.camera);
+        // render map theo layer index
+        renderer.render(Ground);
+        renderer.render(Layer1);
+        renderer.render(Layer2);
+        renderer.render(Layer3);
+        renderer.render(Layer4);
+        box2DDebugRenderer.render(world, game.camera.combined.scl(PPM));
+//        box2DDebugRenderer.render(world, staticCamera.combined.scl(PPM));
 
-//        if(stone_rect.overlaps(img_rect)){
-//            System.out.println("Collided");
-//            imgy=prevy;
-//            imgx=prevx;
-//        }
+        stateTime += delta;
 
-        for (int i = 0; i < heightBlockAmount; i++) {
-            for (int j = 0; j < widthBlockAmount; j++) {
-                if (mapData[i][j] == 1) {
-                    stone_rect = new Rectangle(j * 16, i * 16, stone.getWidth(), stone.getHeight());
-                    if (img_rect.overlaps(stone_rect)) {
-                        // Nếu có va chạm, giữ nguyên vị trí cũ của nhân vật
-                        imgx = prevx;
-                        imgy = prevy;
-                    }
-                }
-            }
-        }
+//        game.batch.setProjectionMatrix(staticCamera.combined);
 
-
-        if(Gdx.input.isKeyPressed(Input.Keys.W)||Gdx.input.isKeyPressed(Input.Keys.UP)){
-            //System.out.println("W");
-            prevy = imgy;
-            imgy+=Gdx.graphics.getDeltaTime()*SPEED;
-            img = new Texture("run.png");
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.A)||Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-            prevx = imgx;
-            imgx-=Gdx.graphics.getDeltaTime()*SPEED;
-            img = new Texture("run.png");
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.S)||Gdx.input.isKeyPressed(Input.Keys.DOWN)){
-            prevy = imgy;
-            imgy-=Gdx.graphics.getDeltaTime()*SPEED;
-            img = new Texture("run.png");
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.D)||Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-            //System.out.println("D");
-            prevx = imgx;
-            imgx+=Gdx.graphics.getDeltaTime()*SPEED;
-            img = new Texture("run.png");
-        }
-        if(!Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)){
-            img = new Texture("still.png");
-        }
-
-        //img_rect = new Rectangle((int) imgx, (int) imgy,img.getWidth(),img.getHeight());
-        //dstone_rect = new Rectangle(j*16, i*16, stone.getWidth(),stone.getHeight());
-        stateTime += v;
         game.batch.begin();
-        stage.draw();
-        game.batch.draw((TextureRegion)rolls[roll].getKeyFrame(stateTime, true), imgx, imgy, CHAR_WIDTH, CHAR_HEIGHT);
-        for(int i=0; i<heightBlockAmount; i++){
-            for(int j=0; j<widthBlockAmount; j++){
-                if(mapData[i][j] == 1/*i==0||j==0||i==heightBlockAmount-1||j==widthBlockAmount-1*/){
-                    //stone_rect = new Rectangle(j * 16, i * 16, stone.getWidth(), stone.getHeight());
-                    game.batch.draw(stone,j*16,i*16);
-                }
-            }
-        }
-
+        game.batch.setProjectionMatrix(game.camera.combined);
+        this.update(delta);
+        player.draw(game.batch);
         game.batch.end();
+        renderer.render(Layer3);
     }
 
     @Override
@@ -188,11 +114,12 @@ public class GameScreen extends InputAdapter implements Screen {
 
     @Override
     public void hide() {
-
+        dispose();
     }
 
     @Override
     public void dispose() {
-
+        renderer.dispose();
+        box2DDebugRenderer.dispose();
     }
 }

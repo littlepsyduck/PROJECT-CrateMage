@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.cratemage.CrateMage;
 
@@ -31,10 +30,9 @@ public class LevelSelectScreen extends ApplicationAdapter implements Screen {
 
         Table table = new Table();
         table.setFillParent(true);
+        backgr = new Texture("levelSelect/backgr.png");
 
-        backgr = new Texture("LevelSelect/backgr.png");
-
-        skin = new Skin(Gdx.files.internal("LevelSelect/level.json"));
+        skin = new Skin(Gdx.files.internal("levelSelect/level.json"));
 
         Button[] buttons = new Button[11];
         buttons[1] = new Button(skin, "level1");
@@ -51,7 +49,7 @@ public class LevelSelectScreen extends ApplicationAdapter implements Screen {
         buttons[1].addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                game.setScreen(new GameScreen(game));
+                game.setScreen(new DemoGameScreen(game));
             }
         });
 
