@@ -11,18 +11,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.cratemage.Main;
+import com.cratemage.CrateMage;
 
 public class LevelSelectScreen extends ApplicationAdapter implements Screen {
     Stage stage;
     Skin skin;
     SpriteBatch batch;
     Texture backgr;
-    Main game;
+    CrateMage game;
 
-    public LevelSelectScreen(Main game) {
+    public LevelSelectScreen(CrateMage game) {
         this.game = game;
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
@@ -31,7 +30,6 @@ public class LevelSelectScreen extends ApplicationAdapter implements Screen {
 
         Table table = new Table();
         table.setFillParent(true);
-
         backgr = new Texture("levelSelect/backgr.png");
 
         skin = new Skin(Gdx.files.internal("levelSelect/level.json"));

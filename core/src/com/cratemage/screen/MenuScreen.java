@@ -5,7 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.cratemage.Main;
+import com.cratemage.CrateMage;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
 public class MenuScreen implements Screen {
@@ -18,7 +18,7 @@ public class MenuScreen implements Screen {
     private static final int NAME_BUTTON_HEIGHT = 500;
     private OrthographicCamera camera;
 
-    Main game;
+    CrateMage game;
 
     Texture namegame;
     Texture exitButtonInactive;
@@ -30,7 +30,7 @@ public class MenuScreen implements Screen {
     Texture tutorialButtonInactive;
     Texture tutorialButtonActive;
 
-    public MenuScreen(Main game) {
+    public MenuScreen(CrateMage game) {
         this.game = game;
         namegame = new Texture("menu/namegame.png");
         playButtonActive = new Texture("menu/newgame.png");
@@ -56,8 +56,6 @@ public class MenuScreen implements Screen {
         ScreenUtils.clear(1, 1, 1, 0);
 
         game.batch.begin();
-
-        //--- Draw BACKGR ---s
         Texture background = new Texture("menu/backgr.png");
         game.batch.draw(background, 0, 0, 1280, 720);
         game.batch.draw(namegame,1280-NAME_BUTTON_WIDTH-100,720-NAME_BUTTON_HEIGHT+10,NAME_BUTTON_WIDTH,NAME_BUTTON_HEIGHT);
@@ -75,6 +73,7 @@ public class MenuScreen implements Screen {
                 touchPoint.y > y &&
                 touchPoint.y < y + PLAY1_BUTTON_HEIGHT) {
             game.batch.draw(playButtonActive, x, y, PLAY2_BUTTON_WIDTH, PLAY2_BUTTON_HEIGHT);
+
             if (Gdx.input.isTouched()) {
                 this.dispose();
                 game.setScreen(new LevelSelectScreen(game));
@@ -82,9 +81,6 @@ public class MenuScreen implements Screen {
         } else {
             game.batch.draw(playButtonInactive, x, y, PLAY1_BUTTON_WIDTH, PLAY1_BUTTON_HEIGHT);
         }
-
-
-
         //-- CONTINUE
 
         // x = 1720/4-100;
@@ -133,10 +129,6 @@ public class MenuScreen implements Screen {
         } else {
             game.batch.draw(exitButtonInactive, x, y, PLAY1_BUTTON_WIDTH, PLAY1_BUTTON_HEIGHT);
         }
-
-
-
-
         game.batch.end();
     }
 
@@ -168,3 +160,4 @@ public class MenuScreen implements Screen {
         // exitButtonInactive.dispose();
     }
 }
+

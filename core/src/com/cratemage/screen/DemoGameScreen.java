@@ -8,13 +8,10 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
-import com.cratemage.Main;
+import com.cratemage.CrateMage;
 
 public class DemoGameScreen implements Screen {
     private TiledMap map;
@@ -34,9 +31,9 @@ public class DemoGameScreen implements Screen {
     float stateTime;
     float prevx, prevy;
 
-    Main game;
+    CrateMage game;
 
-    public DemoGameScreen(Main game) {
+    public DemoGameScreen(CrateMage game) {
         this.game = game;
 
         imgx=256+10;

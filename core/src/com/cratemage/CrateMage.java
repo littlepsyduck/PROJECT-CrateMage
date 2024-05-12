@@ -6,7 +6,7 @@ import com.cratemage.screen.MenuScreen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
-public class Main extends Game {
+public class CrateMage extends Game {
 	public SpriteBatch batch;
 	public BitmapFont font;
 	public OrthographicCamera camera;

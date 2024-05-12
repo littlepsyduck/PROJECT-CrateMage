@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.cratemage.Main;
+import com.cratemage.CrateMage;
 import com.cratemage.controller.TileMapHelper;
 import com.cratemage.model.Player;
 
@@ -19,7 +19,7 @@ import static com.cratemage.common.constant.GameConstant.PPM;
 
 public class GameScreen implements Screen {
     public float stateTime;
-    public Main game;
+    public CrateMage game;
     public World world;
     public Player player;
     public TileMapHelper tileMapHelper;
@@ -30,7 +30,7 @@ public class GameScreen implements Screen {
     public OrthographicCamera playerCamera;
 
     public int[] Ground = new int[] {0}, Layer1 = new int[]{1}, Layer2 = new int[]{2}, Layer3 = new int[]{4}, Layer4 = new int[5]; // Lấy index của layer
-    public GameScreen(Main game){
+    public GameScreen(CrateMage game){
         this.world = new World(new Vector2(0,0), false);
         this.game = game;
         this.box2DDebugRenderer = new Box2DDebugRenderer();
@@ -95,8 +95,6 @@ public class GameScreen implements Screen {
         player.draw(game.batch);
         game.batch.end();
         renderer.render(Layer3);
-
-
     }
 
     @Override
