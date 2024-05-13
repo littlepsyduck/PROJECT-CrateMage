@@ -29,8 +29,8 @@ public class TileMapHelper {
     }
 
     public OrthogonalTiledMapRenderer setupMap(){
-        map = new TmxMapLoader().load("Map1.tmx");
-        parseMapObjects(map.getLayers().get("Ground").getObjects());
+        map = new TmxMapLoader().load("Map/map_1.tmx");
+        parseMapObjects(map.getLayers().get("block").getObjects());
         return new OrthogonalTiledMapRenderer(map);
     }
 
@@ -43,7 +43,7 @@ public class TileMapHelper {
                 Rectangle rectangle = ((RectangleMapObject) mapObject).getRectangle();
                 String rectangleName = mapObject.getName();
 
-                if(rectangleName.equals("Player")) {
+                if(rectangleName.equals("player")) {
                     Body body = BodyHelperService.createBody(
                             rectangle.getX() + rectangle.getWidth() / 2,
                             rectangle.getY() + rectangle.getHeight() / 2,

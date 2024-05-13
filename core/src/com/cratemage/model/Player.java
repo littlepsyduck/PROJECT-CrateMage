@@ -34,10 +34,9 @@ public class Player extends Sprite {
         currentState = State.IDLE;
         previousState = State.IDLE;
         stateTimer = 0;
-        this.speed = 10f;
+        this.speed = 5f;
         this.body = body;
-        setBounds(body.getPosition().x, body.getPosition().y, 48 / PPM, 48 / PPM);
-
+        setBounds(body.getPosition().x, body.getPosition().y, 20 / PPM, 20 / PPM);
 
         up = new Animation[1];
         down = new Animation[1];
@@ -47,7 +46,7 @@ public class Player extends Sprite {
 
         playerTexture = new Texture("character/sheets/DinoSprites - tard.png");
         TextureRegion[][] playerTextureRegion = TextureRegion.split(playerTexture, 24, 24);
-        TextureRegion[] rollFrames = new TextureRegion[24 * 1];
+        TextureRegion[] rollFrames = new TextureRegion[24];
         int index = 0;
         for (int i = 0; i < 1; i++) {
             for (int j = 0; j < 24; j++) {
@@ -68,7 +67,7 @@ public class Player extends Sprite {
 
     public void update(float dt) {
         checkUserInput();
-        setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight()/2.5f);
+        setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2);
         setRegion(getFrame(dt));
     }
 
@@ -82,13 +81,9 @@ public class Player extends Sprite {
                 region = (TextureRegion) down[0].getKeyFrame(stateTimer, true);
                 break;
             case LEFT:
-            case UPLEFT:
-            case DOWNLEFT:
                 region = (TextureRegion) left[0].getKeyFrame(stateTimer, true);
                 break;
             case RIGHT:
-            case DOWNRIGHT:
-            case UPRIGHT:
                 region = (TextureRegion) right[0].getKeyFrame(stateTimer, true);
                 break;
             default:
@@ -100,62 +95,29 @@ public class Player extends Sprite {
     }
 
     public void checkUserInput() {
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+        velX = 0;
+        velY = 0;
+
+        if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) {
             currentState = State.UP;
+            velY = 1;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
             currentState = State.DOWN;
+            velY = -1;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             currentState = State.LEFT;
+            velX = -1;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             currentState = State.RIGHT;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.A) && !Gdx.input.isKeyPressed(Input.Keys.D) && Gdx.input.isKeyPressed(Input.Keys.W) && !Gdx.input.isKeyPressed(Input.Keys.S)) {
-            currentState = State.UPLEFT;
-        }
-        if (!Gdx.input.isKeyPressed(Input.Keys.A) && Gdx.input.isKeyPressed(Input.Keys.D) && Gdx.input.isKeyPressed(Input.Keys.W) && !Gdx.input.isKeyPressed(Input.Keys.S)) {
-            currentState = State.UPRIGHT;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.A) && !Gdx.input.isKeyPressed(Input.Keys.D) && !Gdx.input.isKeyPressed(Input.Keys.W) && Gdx.input.isKeyPressed(Input.Keys.S)) {
-            currentState = State.DOWNLEFT;
-        }
-        if (!Gdx.input.isKeyPressed(Input.Keys.A) && Gdx.input.isKeyPressed(Input.Keys.D) && !Gdx.input.isKeyPressed(Input.Keys.W) && Gdx.input.isKeyPressed(Input.Keys.S)) {
-            currentState = State.DOWNRIGHT;
-        }
-        if (!Gdx.input.isKeyPressed(Input.Keys.A) && !Gdx.input.isKeyPressed(Input.Keys.D) && !Gdx.input.isKeyPressed(Input.Keys.W) && !Gdx.input.isKeyPressed(Input.Keys.S)) {
-            currentState = State.IDLE;
+            velX = 1f;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
             System.out.println("X: " + body.getPosition().x + " Y: " + body.getPosition().y);
         }
 
-        velX = 0;
-        velY = 0;
-        if (currentState == State.UP) {
-            velY = 0.5f;
-        } else if (currentState == State.DOWN) {
-            velY = -0.5f;
-        } else if (currentState == State.LEFT) {
-            velX = -0.5f;
-        } else if (currentState == State.RIGHT) {
-            velX = 0.5f;
-        } else if (currentState == State.UPLEFT) {
-            velX = -0.35f;
-            velY = 0.35f;
-        } else if (currentState == State.UPRIGHT) {
-            velX = 0.35f;
-            velY = 0.35f;
-        } else if (currentState == State.DOWNLEFT) {
-            velX = -0.35f;
-            velY = -0.35f;
-        } else if (currentState == State.DOWNRIGHT) {
-            velX = 0.35f;
-            velY = -0.35f;
-        }
         body.setLinearVelocity(velX * speed, velY * speed);
-
-
     }
 }
