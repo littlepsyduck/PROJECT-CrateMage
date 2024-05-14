@@ -51,7 +51,7 @@ public class DemoGameScreen implements Screen {
     @Override
     public void show() {
         TmxMapLoader loader = new TmxMapLoader();
-        map = loader.load("map/Map1.tmx");
+        map = loader.load("map_1.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
         camera = new OrthographicCamera();
 

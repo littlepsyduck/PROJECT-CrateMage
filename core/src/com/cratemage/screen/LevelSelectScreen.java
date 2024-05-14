@@ -49,7 +49,7 @@ public class LevelSelectScreen extends ApplicationAdapter implements Screen {
         buttons[1].addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                game.setScreen(new DemoGameScreen(game));
+                game.setScreen(new GameScreen(game));
             }
         });
 

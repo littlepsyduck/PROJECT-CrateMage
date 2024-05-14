@@ -23,13 +23,13 @@ public class GameScreen implements Screen {
     public World world;
     public Player player;
     public TileMapHelper tileMapHelper;
-    public TiledMap map = new TmxMapLoader().load("map/Map1.tmx");
+    public TiledMap map = new TmxMapLoader().load("Map/map_1.tmx");
     public OrthogonalTiledMapRenderer renderer;
     public Box2DDebugRenderer box2DDebugRenderer;
     public OrthographicCamera staticCamera;
     public OrthographicCamera playerCamera;
 
-    public int[] Ground = new int[] {0}, Layer1 = new int[]{1}, Layer2 = new int[]{2}, Layer3 = new int[]{4}, Layer4 = new int[5]; // Lấy index của layer
+    public int[] Layer1 = new int[]{0}, Layer2 = new int[]{3}, Layer3 = new int[]{1}; // Lấy index của layer
     public GameScreen(CrateMage game){
         this.world = new World(new Vector2(0,0), false);
         this.game = game;
@@ -43,7 +43,7 @@ public class GameScreen implements Screen {
     @Override
     public void show() {
 //        staticCamera = new OrthographicCamera(512, 360);
-        game.camera = new OrthographicCamera(512, 360);
+        game.camera = new OrthographicCamera(430,240);
 
     }
     public void update(float dt){
@@ -77,11 +77,10 @@ public class GameScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         renderer.setView(game.camera);
         // render map theo layer index
-        renderer.render(Ground);
         renderer.render(Layer1);
-        renderer.render(Layer2);
         renderer.render(Layer3);
-        renderer.render(Layer4);
+        renderer.render(Layer2);
+
         box2DDebugRenderer.render(world, game.camera.combined.scl(PPM));
 //        box2DDebugRenderer.render(world, staticCamera.combined.scl(PPM));
 
@@ -94,7 +93,6 @@ public class GameScreen implements Screen {
         this.update(delta);
         player.draw(game.batch);
         game.batch.end();
-        renderer.render(Layer3);
     }
 
     @Override
