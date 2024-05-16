@@ -1,6 +1,8 @@
 package com.cratemage;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.cratemage.screen.MenuScreen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -10,19 +12,57 @@ public class CrateMage extends Game {
 	public SpriteBatch batch;
 	public BitmapFont font;
 	public OrthographicCamera camera;
-	//public Screen GameScreen;
+	private Music backgroundMusic;
+	private Music mainMusic;
 
 	@Override
-	public void create () {
-//		GameScreen = new GameScreen();
-//		setScreen(GameScreen);
+	public void create() {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
+		camera = new OrthographicCamera();
+		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("Sound/menusound.mp3"));
+		mainMusic = Gdx.audio.newMusic(Gdx.files.internal("Sound/mainsound.mp3"));
+		backgroundMusic.setLooping(true);
+		mainMusic.setLooping(true);
+		playBackgroundMusic();
 		this.setScreen(new MenuScreen(this));
+	}
+
+	public void playBackgroundMusic() {
+		if (!backgroundMusic.isPlaying()) {
+			backgroundMusic.play();
+		}
+	}
+
+	public void stopBackgroundMusic() {
+		if (backgroundMusic.isPlaying()) {
+			backgroundMusic.stop();
+		}
+	}
+
+	public void playMainMusic() {
+		if (!mainMusic.isPlaying()) {
+			mainMusic.play();
+		}
+	}
+
+	public void stopMainMusic() {
+		if (mainMusic.isPlaying()) {
+			mainMusic.stop();
+		}
 	}
 
 	@Override
 	public void render() {
 		super.render();
+	}
+
+	@Override
+	public void dispose() {
+		batch.dispose();
+		font.dispose();
+		backgroundMusic.dispose();
+		mainMusic.dispose();
 	}
 }
