@@ -13,7 +13,7 @@ import com.cratemage.screen.GameScreen;
 import static com.cratemage.common.constant.GameConstant.PPM;
 
 public class Player extends Sprite {
-    public enum State {IDLE, UP, DOWN, LEFT, RIGHT, UPLEFT, UPRIGHT, DOWNLEFT, DOWNRIGHT}
+    public enum State {IDLE, UP, DOWN, LEFT, RIGHT}
 
     public State currentState;
     public State previousState;
