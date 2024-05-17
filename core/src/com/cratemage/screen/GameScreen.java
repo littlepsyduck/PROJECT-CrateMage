@@ -45,6 +45,9 @@ public class GameScreen implements Screen {
 //        staticCamera = new OrthographicCamera(512, 360);
         game.camera = new OrthographicCamera(430,240);
 
+        // -----DUNG NHAC
+        game.stopBackgroundMusic();
+        game.playMainMusic();
     }
     public void update(float dt){
         world.step(1/60f, 6, 2);

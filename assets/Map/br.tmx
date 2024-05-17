@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="23" height="8" tilewidth="32" tileheight="32" infinite="0" nextlayerid="2" nextobjectid="1">
+ <tileset firstgid="1" name="Dungeon_Tileset" tilewidth="32" tileheight="32" tilecount="100" columns="10">
+  <image source="DUPHONG/2D Pixel Dungeon Asset Pack v2.0/2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Tileset.png" width="320" height="320"/>
+ </tileset>
+ <layer id="1" name="Tile Layer 1" width="23" height="8">
+  <data encoding="csv">
+1,2,3,3,3,4,3,4,5,6,79,79,79,1,2,3,4,3,4,3,4,5,6,
+11,12,13,13,13,14,13,14,15,16,79,79,79,11,12,13,14,13,14,13,14,15,16,
+11,22,24,24,24,24,24,24,25,3,3,4,3,4,24,24,24,24,24,23,24,25,26,
+21,22,24,24,24,24,24,24,24,23,13,14,13,14,24,24,24,23,23,23,24,25,26,
+11,22,24,24,23,24,23,23,23,33,34,34,33,34,24,24,23,24,24,24,24,25,26,
+21,22,24,24,24,24,23,24,25,45,44,44,43,44,24,24,23,24,24,23,24,25,26,
+31,32,24,24,34,33,34,33,35,36,79,79,79,31,24,23,23,23,23,23,24,34,26,
+41,42,42,42,44,42,44,43,45,46,79,79,79,41,42,43,44,44,42,43,44,45,46
+</data>
+ </layer>
+</map>
