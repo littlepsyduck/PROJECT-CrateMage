@@ -34,7 +34,7 @@ public class Player extends Sprite {
         currentState = State.IDLE;
         previousState = State.IDLE;
         stateTimer = 0;
-        this.speed = 5f;
+        this.speed = 3f;
         this.body = body;
         setBounds(body.getPosition().x, body.getPosition().y, 20 / PPM, 20 / PPM);
 
@@ -100,15 +100,15 @@ public class Player extends Sprite {
 
         if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) {
             currentState = State.UP;
-            velY = 1;
+            velY = 1f;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
             currentState = State.DOWN;
-            velY = -1;
+            velY = -1f;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             currentState = State.LEFT;
-            velX = -1;
+            velX = -1f;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             currentState = State.RIGHT;

@@ -15,7 +15,7 @@ import com.cratemage.CrateMage;
 import com.cratemage.controller.TileMapHelper;
 import com.cratemage.model.Player;
 
-import static com.cratemage.common.constant.GameConstant.PPM;
+import static com.cratemage.common.constant.GameConstant.*;
 
 public class GameScreen implements Screen {
     public float stateTime;
@@ -43,7 +43,7 @@ public class GameScreen implements Screen {
     @Override
     public void show() {
 //        staticCamera = new OrthographicCamera(512, 360);
-        game.camera = new OrthographicCamera(430,240);
+        game.camera = new OrthographicCamera(WINDOW_WIDTH / 5f,WINDOW_HEIGHT / 5f);
 
         // -----DUNG NHAC
         game.stopBackgroundMusic();
