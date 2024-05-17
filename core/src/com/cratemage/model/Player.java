@@ -34,7 +34,7 @@ public class Player extends Sprite {
         currentState = State.IDLE;
         previousState = State.IDLE;
         stateTimer = 0;
-        this.speed = 5f;
+        this.speed = 2.5f;
         this.body = body;
         setBounds(body.getPosition().x, body.getPosition().y, 20 / PPM, 20 / PPM);
 
