@@ -18,6 +18,13 @@ public class MenuScreen implements Screen {
     private static final int NAME_BUTTON_WIDTH = 580;
     private static final int NAME_BUTTON_HEIGHT = 330;
 
+<<<<<<< HEAD
+=======
+    private static final int MENU1_BUTTON_WIDTH = 50;
+    private static final int MENU1_BUTTON_HEIGHT = 50;
+    private static final int MENU2_BUTTON_WIDTH = 50;
+    private static final int MENU2_BUTTON_HEIGHT = 50;
+>>>>>>> 9a1ef6f7a65b3ce5d9df549f13e5a28ffe9b9bf6
 
     private OrthographicCamera camera;
     private Music clickSound;
@@ -27,6 +34,10 @@ public class MenuScreen implements Screen {
     private boolean continueButtonPreviouslyTouched = false;
     private boolean tutorialButtonPreviouslyTouched = false;
     private boolean exitButtonPreviouslyTouched = false;
+<<<<<<< HEAD
+=======
+    private boolean menuhomeButtonPreviouslyTouched = false;
+>>>>>>> 9a1ef6f7a65b3ce5d9df549f13e5a28ffe9b9bf6
 
     CrateMage game;
 
@@ -200,6 +211,38 @@ public class MenuScreen implements Screen {
             exitButtonPreviouslyTouched = false;
         }
 
+<<<<<<< HEAD
+=======
+        //____ MENU_BUTTON
+        //--home
+
+        x = 1280-60;
+        y = 720-60;
+
+        isTouchingButton = touchPoint.x < x + MENU1_BUTTON_WIDTH &&
+                touchPoint.x > x &&
+                touchPoint.y > y &&
+                touchPoint.y < y + MENU1_BUTTON_HEIGHT;
+
+        if (isTouchingButton) {
+            game.batch.draw(menuhomeButtonActive, x, y, MENU2_BUTTON_WIDTH, MENU2_BUTTON_HEIGHT);
+
+            if (!menuhomeButtonPreviouslyTouched) {
+                clickSound1.play();
+                menuhomeButtonPreviouslyTouched = true;
+            }
+
+            if (Gdx.input.justTouched()) {
+                clickSound.play();
+                this.dispose();
+                game.setScreen(new MenuScreen(game));
+            }
+
+        } else {
+            game.batch.draw(menuhomeButtonInactive, x, y, MENU1_BUTTON_WIDTH, MENU1_BUTTON_HEIGHT);
+            menuhomeButtonPreviouslyTouched = false;
+        }
+>>>>>>> 9a1ef6f7a65b3ce5d9df549f13e5a28ffe9b9bf6
 
         game.batch.end();
     }
