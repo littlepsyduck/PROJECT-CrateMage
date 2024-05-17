@@ -1,0 +1,24 @@
+
+homebutton.png
+size: 2048, 2048
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+home
+  rotate: false
+  xy: 1, 1
+  size: 800, 800
+  split: 38, 19, 29, 27
+  pad: 0, 0, 0, 0
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+inhome
+  rotate: false
+  xy: 1, 803
+  size: 800, 800
+  split: 38, 21, 29, 27
+  pad: 0, 0, 0, 0
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
