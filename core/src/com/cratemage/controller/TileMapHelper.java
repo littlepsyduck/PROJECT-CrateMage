@@ -66,7 +66,7 @@ public class TileMapHelper {
                             gameScreen.world,
                             5
                     );
-                    gameScreen.box = new Box(gameScreen, body);
+                    gameScreen.boxes.add(new Box(gameScreen, body));
                 }
             }
         }
