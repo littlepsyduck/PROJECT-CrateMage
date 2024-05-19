@@ -34,9 +34,9 @@ public class LevelSelectScreen extends ApplicationAdapter implements Screen {
 
         Table table = new Table();
         table.setFillParent(true);
-        backgr = new Texture("LevelSelect/backgr.png");
+        backgr = new Texture("levelSelect/backgr.png");
 
-        skin = new Skin(Gdx.files.internal("LevelSelect/level.json"));
+        skin = new Skin(Gdx.files.internal("levelSelect/level.json"));
 
         Button[] buttons = new Button[11];
         buttons[1] = new Button(skin, "level1");

@@ -19,6 +19,8 @@ import com.cratemage.model.Box;
 import com.cratemage.model.Player;
 import java.util.ArrayList;
 
+import static com.cratemage.common.constant.GameConstant.*;
+
 public class GameScreen implements Screen {
     public float stateTime;
     public CrateMage game;
