@@ -17,10 +17,7 @@ import com.cratemage.CrateMage;
 import com.cratemage.controller.TileMapHelper;
 import com.cratemage.model.Box;
 import com.cratemage.model.Player;
-
 import java.util.ArrayList;
-
-import static com.cratemage.common.constant.GameConstant.*;
 
 public class GameScreen implements Screen {
     public float stateTime;
@@ -53,6 +50,9 @@ public class GameScreen implements Screen {
 //        staticCamera = new OrthographicCamera(512, 360);
         game.camera = new OrthographicCamera(WINDOW_WIDTH / 5f,WINDOW_HEIGHT / 5f);
 
+        // -----DUNG NHAC
+        game.stopBackgroundMusic();
+        game.playMainMusic();
     }
     public void update(float dt){
         world.step(1/60f, 6, 2);

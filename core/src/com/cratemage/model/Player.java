@@ -102,7 +102,7 @@ public class Player extends Sprite {
 
         if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) {
             currentState = State.UP;
-            body.applyLinearImpulse(new Vector2(0f, speed), body.getWorldCenter(), true);
+            //body.applyLinearImpulse(new Vector2(0f, speed), body.getWorldCenter(), true);
             velY = 1;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
