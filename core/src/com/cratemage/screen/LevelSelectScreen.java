@@ -33,12 +33,15 @@ public class LevelSelectScreen extends ApplicationAdapter implements Screen {
         backgr = new Texture("levelSelect/backgr.png");
 
         skin = new Skin(Gdx.files.internal("levelSelect/level.json"));
+<<<<<<< HEAD
 
         ButtonManager buttonManager = new ButtonManager(game);
         Button homeButton = buttonManager.createHomeButton();
         Button musicButton = buttonManager.createMusicButton();
         stage.addActor(homeButton);
         stage.addActor(musicButton);
+=======
+>>>>>>> 45ece78b9e1cbc9a8f6538e669c93b68ee226b26
 
         Button[] buttons = new Button[11];
         buttons[1] = new Button(skin, "level1");
