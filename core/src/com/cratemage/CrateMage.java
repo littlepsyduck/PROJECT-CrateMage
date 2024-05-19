@@ -14,6 +14,7 @@ public class CrateMage extends Game {
 	public OrthographicCamera camera;
 	private Music backgroundMusic;
 	private Music mainMusic;
+	private boolean isSoundOn = true; // Add this line
 
 	@Override
 	public void create() {
@@ -23,6 +24,7 @@ public class CrateMage extends Game {
 		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("Sound/menusound.mp3"));
 		mainMusic = Gdx.audio.newMusic(Gdx.files.internal("Sound/mainsound.mp3"));
+
 		backgroundMusic.setLooping(true);
 		mainMusic.setLooping(true);
 		playBackgroundMusic();
@@ -30,7 +32,7 @@ public class CrateMage extends Game {
 	}
 
 	public void playBackgroundMusic() {
-		if (!backgroundMusic.isPlaying()) {
+		if (isSoundOn && !backgroundMusic.isPlaying()) {
 			backgroundMusic.play();
 		}
 	}
@@ -42,7 +44,7 @@ public class CrateMage extends Game {
 	}
 
 	public void playMainMusic() {
-		if (!mainMusic.isPlaying()) {
+		if (isSoundOn && !mainMusic.isPlaying()) {
 			mainMusic.play();
 		}
 	}
@@ -51,6 +53,15 @@ public class CrateMage extends Game {
 		if (mainMusic.isPlaying()) {
 			mainMusic.stop();
 		}
+	}
+
+	// Add these getter and setter methods for isSoundOn
+	public boolean isSoundOn() {
+		return isSoundOn;
+	}
+
+	public void setSoundOn(boolean isSoundOn) {
+		this.isSoundOn = isSoundOn;
 	}
 
 	@Override

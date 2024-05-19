@@ -3,7 +3,6 @@ package com.cratemage.screen;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -22,21 +21,24 @@ public class LevelSelectScreen extends ApplicationAdapter implements Screen {
     Texture backgr;
     CrateMage game;
 
-    private Music clickSound;
-
     public LevelSelectScreen(CrateMage game) {
         this.game = game;
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 
-
         batch = (SpriteBatch) stage.getBatch();
 
         Table table = new Table();
         table.setFillParent(true);
-        backgr = new Texture("LevelSelect/backgr.png");
+        backgr = new Texture("levelSelect/backgr.png");
 
-        skin = new Skin(Gdx.files.internal("LevelSelect/level.json"));
+        skin = new Skin(Gdx.files.internal("levelSelect/level.json"));
+
+        ButtonManager buttonManager = new ButtonManager(game);
+        Button homeButton = buttonManager.createHomeButton();
+        Button musicButton = buttonManager.createMusicButton();
+        stage.addActor(homeButton);
+        stage.addActor(musicButton);
 
         Button[] buttons = new Button[11];
         buttons[1] = new Button(skin, "level1");
@@ -50,43 +52,38 @@ public class LevelSelectScreen extends ApplicationAdapter implements Screen {
         buttons[9] = new Button(skin, "level9");
         buttons[10] = new Button(skin, "level10");
 
-        //---sound button
-        clickSound = Gdx.audio.newMusic(Gdx.files.internal("Sound/startgame.mp3"));
-
         buttons[1].addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                clickSound.play();
                 game.setScreen(new GameScreen(game));
             }
         });
 
-        for(int i = 1; i <= 5; i++){
+        for (int i = 1; i <= 5; i++) {
             table.add(buttons[i]).pad(50);
         }
-        //table.add(buttons[1], buttons[2], buttons[3], buttons[4], buttons[5]);
         table.row();
-        table.add(buttons[6], buttons[7], buttons[8], buttons[9], buttons[10]);
-        buttons[3].setDisabled(true); // set disabled
-        buttons[4].setDisabled(true);
-        buttons[5].setDisabled(true);
-        buttons[6].setDisabled(true);
-        buttons[7].setDisabled(true);
-        buttons[8].setDisabled(true);
-        buttons[9].setDisabled(true);
-        buttons[10].setDisabled(true);
+        for (int i = 6; i <= 10; i++) {
+            table.add(buttons[i]).pad(50);
+        }
+
+        // Disable buttons for levels that are not available
+        for (int i = 3; i <= 10; i++) {
+            buttons[i].setDisabled(true);
+        }
 
         stage.addActor(table);
     }
+
     @Override
     public void show() {
-
+        game.playBackgroundMusic();
     }
 
     @Override
     public void render(float delta) {
         batch.begin();
-        batch.draw(backgr, 0, 0);
+        batch.draw(backgr, 0, 0, 1280, 720);
         batch.end();
 
         stage.act(Gdx.graphics.getDeltaTime());
@@ -100,6 +97,12 @@ public class LevelSelectScreen extends ApplicationAdapter implements Screen {
 
     @Override
     public void hide() {
+        game.stopBackgroundMusic();
+    }
 
+    @Override
+    public void dispose() {
+        stage.dispose();
+        backgr.dispose();
     }
 }
