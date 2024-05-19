@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.cratemage.screen.GameScreen;
@@ -34,10 +35,10 @@ public class Player extends Sprite {
         currentState = State.IDLE;
         previousState = State.IDLE;
         stateTimer = 0;
-        this.speed = 3f;
+        this.speed = 2.5f;
         this.body = body;
+        body.setGravityScale(0);
         setBounds(body.getPosition().x, body.getPosition().y, 20 / PPM, 20 / PPM);
-
         up = new Animation[1];
         down = new Animation[1];
         left = new Animation[1];
@@ -69,6 +70,7 @@ public class Player extends Sprite {
         checkUserInput();
         setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2);
         setRegion(getFrame(dt));
+        //System.out.println(body.getPosition().x + " " +  body.getPosition().y);
     }
 
     public TextureRegion getFrame(float dt) {
@@ -100,24 +102,25 @@ public class Player extends Sprite {
 
         if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) {
             currentState = State.UP;
-            velY = 1f;
+            //body.applyLinearImpulse(new Vector2(0f, speed), body.getWorldCenter(), true);
+            velY = 1;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
             currentState = State.DOWN;
-            velY = -1f;
+            //body.applyLinearImpulse(new Vector2(0, -speed), body.getWorldCenter(), true);
+            velY = -1;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             currentState = State.LEFT;
-            velX = -1f;
+            //body.applyLinearImpulse(new Vector2(-speed, 0), body.getWorldCenter(), true);
+            velX = -1;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             currentState = State.RIGHT;
+            //body.applyLinearImpulse(new Vector2(speed, 0), body.getWorldCenter(), true);
             velX = 1f;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-            System.out.println("X: " + body.getPosition().x + " Y: " + body.getPosition().y);
-        }
-
         body.setLinearVelocity(velX * speed, velY * speed);
+
     }
 }

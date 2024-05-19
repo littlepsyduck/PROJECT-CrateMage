@@ -1,6 +1,7 @@
 package com.cratemage.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -9,25 +10,28 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.cratemage.CrateMage;
 import com.cratemage.controller.TileMapHelper;
+import com.cratemage.model.Box;
 import com.cratemage.model.Player;
-
-import static com.cratemage.common.constant.GameConstant.*;
+import java.util.ArrayList;
 
 public class GameScreen implements Screen {
     public float stateTime;
     public CrateMage game;
     public World world;
     public Player player;
+    public ArrayList<Box> boxes = new ArrayList<>();
     public TileMapHelper tileMapHelper;
     public TiledMap map = new TmxMapLoader().load("Map/map_1.tmx");
     public OrthogonalTiledMapRenderer renderer;
     public Box2DDebugRenderer box2DDebugRenderer;
     public OrthographicCamera staticCamera;
     public OrthographicCamera playerCamera;
+
 
     public int[] Layer1 = new int[]{0}, Layer2 = new int[]{3}, Layer3 = new int[]{1}; // Lấy index của layer
     public GameScreen(CrateMage game){
@@ -36,6 +40,7 @@ public class GameScreen implements Screen {
         this.box2DDebugRenderer = new Box2DDebugRenderer();
         box2DDebugRenderer.setDrawBodies(false);
         box2DDebugRenderer.setDrawJoints(false);
+        box2DDebugRenderer.setDrawContacts(false);
         this.tileMapHelper = new TileMapHelper(this);
         this.renderer = tileMapHelper.setupMap();
 
@@ -69,11 +74,14 @@ public class GameScreen implements Screen {
         if (game.camera.position.y > map.getProperties().get("height", Integer.class) * map.getProperties().get("tileheight", Integer.class) - game.camera.viewportHeight / 2) {
             game.camera.position.y = map.getProperties().get("height", Integer.class) * map.getProperties().get("tileheight", Integer.class) - game.camera.viewportHeight / 2;
         }
+
         player.update(dt);
+        for(Box box: boxes){
+            box.update(dt);
+        }
         game.camera.update();
 //        staticCamera.update();
     }
-
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -82,7 +90,7 @@ public class GameScreen implements Screen {
         // render map theo layer index
         renderer.render(Layer1);
         renderer.render(Layer3);
-        renderer.render(Layer2);
+//        renderer.render(Layer2);
 
         box2DDebugRenderer.render(world, game.camera.combined.scl(PPM));
 //        box2DDebugRenderer.render(world, staticCamera.combined.scl(PPM));
@@ -94,8 +102,14 @@ public class GameScreen implements Screen {
         game.batch.begin();
         game.batch.setProjectionMatrix(game.camera.combined);
         this.update(delta);
+
+        for(Box box: boxes){
+            box.draw(game.batch);
+        }
+
         player.draw(game.batch);
         game.batch.end();
+
     }
 
     @Override
