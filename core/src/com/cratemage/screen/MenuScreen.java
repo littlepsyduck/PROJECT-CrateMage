@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+
 public class MenuScreen implements Screen {
 
     private static final int PLAY1_BUTTON_WIDTH = 360;
@@ -46,6 +47,7 @@ public class MenuScreen implements Screen {
     Texture tutorialButtonInactive;
     Texture tutorialButtonActive;
 
+
     public MenuScreen(CrateMage game) {
         this.game = game;
         namegame = new Texture("menu/namegame.png");
@@ -58,7 +60,8 @@ public class MenuScreen implements Screen {
         exitButtonActive = new Texture("menu/exit.png");
         exitButtonInactive = new Texture("menu/inexit.png");
 
-        //--- nút âm thanh
+
+        //---sound button
         clickSound = Gdx.audio.newMusic(Gdx.files.internal("Sound/MouseClick.mp3"));
         clickSound1 = Gdx.audio.newMusic(Gdx.files.internal("Sound/mousetouch.mp3"));
 
@@ -66,6 +69,7 @@ public class MenuScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
         batch = (SpriteBatch) stage.getBatch();
         buttonManager = new ButtonManager(game);
+
     }
 
     @Override
@@ -77,6 +81,7 @@ public class MenuScreen implements Screen {
         game.playBackgroundMusic();
         Button musicButton = buttonManager.createMusicButton();
         stage.addActor(musicButton);
+
     }
 
     @Override
@@ -89,7 +94,8 @@ public class MenuScreen implements Screen {
         batch.draw(background, 0, 0, 1280, 720);
         batch.draw(namegame, 1280 - NAME_BUTTON_WIDTH - 100, 720 - NAME_BUTTON_HEIGHT + 10, NAME_BUTTON_WIDTH, NAME_BUTTON_HEIGHT);
 
-        //--- NÚT NEW GAME
+        //--- NEWGAME
+
         int x = 720 / 4 - 100;
         int y = 720 - 90 - PLAY1_BUTTON_HEIGHT;  //720-480-(3*20)
 
@@ -119,7 +125,9 @@ public class MenuScreen implements Screen {
             playButtonPreviouslyTouched = false;
         }
 
-        //-- NÚT CONTINUE
+        //-- CONTINUE
+
+        // x = 1720/4-100;
         y = 720 - 90 - PLAY1_BUTTON_HEIGHT * 2 - 20;
 
         isTouchingButton = touchPoint.x < x + PLAY1_BUTTON_WIDTH &&
@@ -146,7 +154,8 @@ public class MenuScreen implements Screen {
             continueButtonPreviouslyTouched = false;
         }
 
-        //-- NÚT TUTORIAL
+        //-- TUTORIAL
+
         y = 720 - 90 - PLAY1_BUTTON_HEIGHT * 3 - 20 * 2;
 
         isTouchingButton = touchPoint.x < x + PLAY1_BUTTON_WIDTH &&
@@ -155,6 +164,7 @@ public class MenuScreen implements Screen {
                 touchPoint.y < y + PLAY1_BUTTON_HEIGHT;
 
         if (isTouchingButton) {
+
             batch.draw(tutorialButtonActive, x, y, PLAY2_BUTTON_WIDTH, PLAY2_BUTTON_HEIGHT);
 
             if (!tutorialButtonPreviouslyTouched) {
@@ -170,10 +180,11 @@ public class MenuScreen implements Screen {
         } else {
             batch.draw(tutorialButtonInactive, x, y, PLAY1_BUTTON_WIDTH, PLAY1_BUTTON_HEIGHT);
             tutorialButtonPreviouslyTouched = false;
+
         }
 
-        // ---- NÚT EXIT
-        y = 720 - 90 - PLAY1_BUTTON_HEIGHT * 4 - 20 * 3; // 20 là khoảng cách các nút
+        // ----EXIT
+        y = 720 - 90 - PLAY1_BUTTON_HEIGHT * 4 - 20 * 3; // 20 là khoảng cách các button
 
         isTouchingButton = touchPoint.x < x + PLAY1_BUTTON_WIDTH &&
                 touchPoint.x > x &&
@@ -209,17 +220,21 @@ public class MenuScreen implements Screen {
 
     @Override
     public void pause() {
+
     }
 
     @Override
     public void resume() {
+
     }
 
     @Override
     public void hide() {
+
     }
 
     @Override
     public void dispose() {
+
     }
 }
