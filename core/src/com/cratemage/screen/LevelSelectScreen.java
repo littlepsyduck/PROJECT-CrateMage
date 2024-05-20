@@ -3,6 +3,7 @@ package com.cratemage.screen;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -20,6 +21,8 @@ public class LevelSelectScreen extends ApplicationAdapter implements Screen {
     SpriteBatch batch;
     Texture backgr;
     CrateMage game;
+    private Music clickSound;
+
 
     public LevelSelectScreen(CrateMage game) {
         this.game = game;
@@ -52,9 +55,15 @@ public class LevelSelectScreen extends ApplicationAdapter implements Screen {
         buttons[9] = new Button(skin, "level9");
         buttons[10] = new Button(skin, "level10");
 
+        //---sound button
+        clickSound = Gdx.audio.newMusic(Gdx.files.internal("Sound/MouseClick.mp3"));
+
         buttons[1].addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                if (game.isSoundOn()) {
+                    clickSound.play();
+                }
                 game.setScreen(new GameScreen(game));
             }
         });
@@ -77,6 +86,7 @@ public class LevelSelectScreen extends ApplicationAdapter implements Screen {
 
     @Override
     public void show() {
+        game.stopAllMusic();
         game.playBackgroundMusic();
     }
 

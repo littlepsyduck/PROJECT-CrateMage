@@ -55,7 +55,6 @@ public class CrateMage extends Game {
 		}
 	}
 
-	// Add these getter and setter methods for isSoundOn
 	public boolean isSoundOn() {
 		return isSoundOn;
 	}
@@ -76,4 +75,10 @@ public class CrateMage extends Game {
 		backgroundMusic.dispose();
 		mainMusic.dispose();
 	}
+	public void stopAllMusic() {
+		stopBackgroundMusic();
+		stopMainMusic();
+
+	}
+
 }

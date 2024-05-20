@@ -59,7 +59,7 @@ public class GameScreen implements Screen {
         game.camera = new OrthographicCamera(WINDOW_WIDTH / 5f, WINDOW_HEIGHT / 5f);
 
         // -----DUNG NHAC
-        game.stopBackgroundMusic();
+        game.stopAllMusic();
         game.playMainMusic();
 
         //--HTH
@@ -67,9 +67,14 @@ public class GameScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
         buttonManager = new ButtonManager(game);
         Button homeButton = buttonManager.createHomeButton();
+        Button menuButton = buttonManager.createMenuButton();
+        Button resetButton = buttonManager.creatResetButton();
         Button musicButton = buttonManager.createMusicButton();
 
+
         stage.addActor(homeButton);
+        stage.addActor(menuButton);
+        stage.addActor(resetButton);
         stage.addActor(musicButton);
     }
 

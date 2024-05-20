@@ -25,13 +25,13 @@ public class MenuScreen implements Screen {
 
     private OrthographicCamera camera;
     private Music clickSound;
-    private Music clickSound1;
+//    private Music clickSound1;
     private ButtonManager buttonManager;
 
-    private boolean playButtonPreviouslyTouched = false;
-    private boolean continueButtonPreviouslyTouched = false;
-    private boolean tutorialButtonPreviouslyTouched = false;
-    private boolean exitButtonPreviouslyTouched = false;
+//    private boolean playButtonPreviouslyTouched = false;
+//    private boolean continueButtonPreviouslyTouched = false;
+//    private boolean tutorialButtonPreviouslyTouched = false;
+//    private boolean exitButtonPreviouslyTouched = false;
 
     CrateMage game;
     Stage stage;
@@ -63,7 +63,7 @@ public class MenuScreen implements Screen {
 
         //---sound button
         clickSound = Gdx.audio.newMusic(Gdx.files.internal("Sound/MouseClick.mp3"));
-        clickSound1 = Gdx.audio.newMusic(Gdx.files.internal("Sound/mousetouch.mp3"));
+//        clickSound1 = Gdx.audio.newMusic(Gdx.files.internal("Sound/mousetouch.mp3"));
 
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
@@ -78,6 +78,7 @@ public class MenuScreen implements Screen {
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.update();
 
+        game.stopAllMusic();
         game.playBackgroundMusic();
         Button musicButton = buttonManager.createMusicButton();
         stage.addActor(musicButton);
@@ -110,19 +111,21 @@ public class MenuScreen implements Screen {
         if (isTouchingButton) {
             batch.draw(playButtonActive, x, y, PLAY2_BUTTON_WIDTH, PLAY2_BUTTON_HEIGHT);
 
-            if (!playButtonPreviouslyTouched) {
-                clickSound1.play();
-                playButtonPreviouslyTouched = true;
-            }
+//            if (!playButtonPreviouslyTouched) {
+//                clickSound1.play();
+//                playButtonPreviouslyTouched = true;
+//            }
 
             if (Gdx.input.isTouched()) {
-                clickSound.play();
+                if (game.isSoundOn()) {
+                    clickSound.play();
+                }
                 this.dispose();
                 game.setScreen(new LevelSelectScreen(game));
             }
         } else {
             batch.draw(playButtonInactive, x, y, PLAY1_BUTTON_WIDTH, PLAY1_BUTTON_HEIGHT);
-            playButtonPreviouslyTouched = false;
+//            playButtonPreviouslyTouched = false;
         }
 
         //-- CONTINUE
@@ -138,10 +141,10 @@ public class MenuScreen implements Screen {
         if (isTouchingButton) {
             batch.draw(continueButtonActive, x, y, PLAY2_BUTTON_WIDTH, PLAY2_BUTTON_HEIGHT);
 
-            if (!continueButtonPreviouslyTouched) {
-                clickSound1.play();
-                continueButtonPreviouslyTouched = true;
-            }
+//            if (!continueButtonPreviouslyTouched) {
+//                clickSound1.play();
+//                continueButtonPreviouslyTouched = true;
+//            }
 
             if (Gdx.input.isTouched()) {
                 clickSound.play();
@@ -151,7 +154,7 @@ public class MenuScreen implements Screen {
 
         } else {
             batch.draw(continueButtonInactive, x, y, PLAY1_BUTTON_WIDTH, PLAY1_BUTTON_HEIGHT);
-            continueButtonPreviouslyTouched = false;
+//            continueButtonPreviouslyTouched = false;
         }
 
         //-- TUTORIAL
@@ -167,10 +170,10 @@ public class MenuScreen implements Screen {
 
             batch.draw(tutorialButtonActive, x, y, PLAY2_BUTTON_WIDTH, PLAY2_BUTTON_HEIGHT);
 
-            if (!tutorialButtonPreviouslyTouched) {
-                clickSound1.play();
-                tutorialButtonPreviouslyTouched = true;
-            }
+//            if (!tutorialButtonPreviouslyTouched) {
+//                clickSound1.play();
+//                tutorialButtonPreviouslyTouched = true;
+//            }
 
             if (Gdx.input.isTouched()) {
                 clickSound.play();
@@ -179,7 +182,7 @@ public class MenuScreen implements Screen {
             }
         } else {
             batch.draw(tutorialButtonInactive, x, y, PLAY1_BUTTON_WIDTH, PLAY1_BUTTON_HEIGHT);
-            tutorialButtonPreviouslyTouched = false;
+//            tutorialButtonPreviouslyTouched = false;
 
         }
 
@@ -194,10 +197,10 @@ public class MenuScreen implements Screen {
         if (isTouchingButton) {
             batch.draw(exitButtonActive, x, y, PLAY2_BUTTON_WIDTH, PLAY2_BUTTON_HEIGHT);
 
-            if (!exitButtonPreviouslyTouched) {
-                clickSound1.play();
-                exitButtonPreviouslyTouched = true;
-            }
+//            if (!exitButtonPreviouslyTouched) {
+//                clickSound1.play();
+//                exitButtonPreviouslyTouched = true;
+//            }
 
             if (Gdx.input.isTouched()) {
                 clickSound.play();
@@ -206,7 +209,7 @@ public class MenuScreen implements Screen {
             }
         } else {
             batch.draw(exitButtonInactive, x, y, PLAY1_BUTTON_WIDTH, PLAY1_BUTTON_HEIGHT);
-            exitButtonPreviouslyTouched = false;
+//            exitButtonPreviouslyTouched = false;
         }
         batch.end();
 
