@@ -17,14 +17,10 @@ public class MenuScreen implements Screen {
     private static final int PLAY2_BUTTON_HEIGHT = 120;
     private static final int NAME_BUTTON_WIDTH = 580;
     private static final int NAME_BUTTON_HEIGHT = 330;
-
-<<<<<<< HEAD
-=======
     private static final int MENU1_BUTTON_WIDTH = 50;
     private static final int MENU1_BUTTON_HEIGHT = 50;
     private static final int MENU2_BUTTON_WIDTH = 50;
     private static final int MENU2_BUTTON_HEIGHT = 50;
->>>>>>> 9a1ef6f7a65b3ce5d9df549f13e5a28ffe9b9bf6
 
     private OrthographicCamera camera;
     private Music clickSound;
@@ -34,10 +30,7 @@ public class MenuScreen implements Screen {
     private boolean continueButtonPreviouslyTouched = false;
     private boolean tutorialButtonPreviouslyTouched = false;
     private boolean exitButtonPreviouslyTouched = false;
-<<<<<<< HEAD
-=======
     private boolean menuhomeButtonPreviouslyTouched = false;
->>>>>>> 9a1ef6f7a65b3ce5d9df549f13e5a28ffe9b9bf6
 
     CrateMage game;
 
@@ -210,9 +203,6 @@ public class MenuScreen implements Screen {
             game.batch.draw(exitButtonInactive, x, y, PLAY1_BUTTON_WIDTH, PLAY1_BUTTON_HEIGHT);
             exitButtonPreviouslyTouched = false;
         }
-
-<<<<<<< HEAD
-=======
         //____ MENU_BUTTON
         //--home
 
@@ -242,7 +232,6 @@ public class MenuScreen implements Screen {
             game.batch.draw(menuhomeButtonInactive, x, y, MENU1_BUTTON_WIDTH, MENU1_BUTTON_HEIGHT);
             menuhomeButtonPreviouslyTouched = false;
         }
->>>>>>> 9a1ef6f7a65b3ce5d9df549f13e5a28ffe9b9bf6
 
         game.batch.end();
     }

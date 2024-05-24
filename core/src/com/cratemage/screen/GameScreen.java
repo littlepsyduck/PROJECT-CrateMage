@@ -14,10 +14,13 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.cratemage.CrateMage;
+import com.cratemage.controller.MyContactListener;
 import com.cratemage.controller.TileMapHelper;
 import com.cratemage.model.Box;
 import com.cratemage.model.Player;
 import java.util.ArrayList;
+
+import static com.cratemage.common.constant.GameConstant.*;
 
 public class GameScreen implements Screen {
     public float stateTime;
@@ -31,8 +34,7 @@ public class GameScreen implements Screen {
     public Box2DDebugRenderer box2DDebugRenderer;
     public OrthographicCamera staticCamera;
     public OrthographicCamera playerCamera;
-
-
+    MyContactListener listener;
     public int[] Layer1 = new int[]{0}, Layer2 = new int[]{3}, Layer3 = new int[]{1}; // Lấy index của layer
     public GameScreen(CrateMage game){
         this.world = new World(new Vector2(0,0), false);
@@ -43,7 +45,8 @@ public class GameScreen implements Screen {
         box2DDebugRenderer.setDrawContacts(false);
         this.tileMapHelper = new TileMapHelper(this);
         this.renderer = tileMapHelper.setupMap();
-
+        listener = new MyContactListener(boxes, world);
+        world.setContactListener(listener);
     }
     @Override
     public void show() {
@@ -109,7 +112,6 @@ public class GameScreen implements Screen {
 
         player.draw(game.batch);
         game.batch.end();
-
     }
 
     @Override
