@@ -18,20 +18,17 @@ public class Box extends Sprite {
     public World world;
     public Body body;
     public TextureRegion[][] region;
-
     public Texture texture;
     public float speed, velX, velY;
-    float GRAVITY_EARTH = -9.8f;
-    Vector2 gravity = new Vector2(0, GRAVITY_EARTH);
+    boolean contact = false;
     public Box(GameScreen screen, Body body) {
         this.world = screen.world;
-        //world.setGravity(gravity);
         texture = new Texture("Map/box.png");
         setRegion(texture);
         setBounds(body.getPosition().x,body.getPosition().y,20/PPM, 20/PPM);
         this.body = body;
         this.speed = 5f;
-
+        body.setUserData(this);
     }
     public void update(float dt){
         setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2);
