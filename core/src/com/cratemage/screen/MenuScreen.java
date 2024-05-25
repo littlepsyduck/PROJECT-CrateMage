@@ -28,10 +28,17 @@ public class MenuScreen implements Screen {
 //    private Music clickSound1;
     private ButtonManager buttonManager;
 
+<<<<<<< HEAD
 //    private boolean playButtonPreviouslyTouched = false;
 //    private boolean continueButtonPreviouslyTouched = false;
 //    private boolean tutorialButtonPreviouslyTouched = false;
 //    private boolean exitButtonPreviouslyTouched = false;
+=======
+    private boolean playButtonPreviouslyTouched = false;
+    private boolean continueButtonPreviouslyTouched = false;
+    private boolean tutorialButtonPreviouslyTouched = false;
+    private boolean exitButtonPreviouslyTouched = false;
+>>>>>>> 75d70660fce0e1f4d15b64f3bf5b4ba346cf063e
 
     CrateMage game;
     Stage stage;
