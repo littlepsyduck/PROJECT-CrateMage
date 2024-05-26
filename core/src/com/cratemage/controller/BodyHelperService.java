@@ -7,7 +7,7 @@ import static com.cratemage.common.constant.GameConstant.PPM;
 
 public class BodyHelperService {
 
-    public static Body createBody(float x, float y, float width, float height, boolean isStatic, World world){
+    public static Body createBody(float x, float y, float width, float height, boolean isStatic, World world, float friction){
         BodyDef bodyDef = new BodyDef();
         bodyDef.type =  isStatic ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(x / PPM, y / PPM);
@@ -19,6 +19,7 @@ public class BodyHelperService {
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
+        fixtureDef.friction = friction;
         body.createFixture(fixtureDef);
         shape.dispose();
         return body;

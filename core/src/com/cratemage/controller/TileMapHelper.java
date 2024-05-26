@@ -13,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
+import com.cratemage.model.Box;
 import com.cratemage.model.Player;
 import com.cratemage.screen.GameScreen;
 
@@ -50,9 +51,22 @@ public class TileMapHelper {
                             rectangle.getWidth(),
                             rectangle.getHeight(),
                             false,
-                            gameScreen.world
+                            gameScreen.world,
+                            0
                     );
                     gameScreen.player = new Player(gameScreen, body);
+                }
+                if(rectangleName.equals("box")){
+                    Body body = BodyHelperService.createBody(
+                            rectangle.getX() + rectangle.getWidth() / 2,
+                            rectangle.getY() + rectangle.getHeight() / 2,
+                            rectangle.getWidth(),
+                            rectangle.getHeight(),
+                            false,
+                            gameScreen.world,
+                            5
+                    );
+                    gameScreen.boxes.add(new Box(gameScreen, body));
                 }
             }
         }
