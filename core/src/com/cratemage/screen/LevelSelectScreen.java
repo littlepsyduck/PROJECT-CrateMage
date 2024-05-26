@@ -37,11 +37,13 @@ public class LevelSelectScreen extends ApplicationAdapter implements Screen {
 
         skin = new Skin(Gdx.files.internal("levelSelect/level.json"));
 
+
         ButtonManager buttonManager = new ButtonManager(game);
         Button homeButton = buttonManager.createHomeButton();
         Button musicButton = buttonManager.createMusicButton();
         stage.addActor(homeButton);
         stage.addActor(musicButton);
+
 
         Button[] buttons = new Button[11];
         buttons[1] = new Button(skin, "level1");
@@ -56,7 +58,9 @@ public class LevelSelectScreen extends ApplicationAdapter implements Screen {
         buttons[10] = new Button(skin, "level10");
 
         //---sound button
+
         clickSound = Gdx.audio.newMusic(Gdx.files.internal("Sound/MouseClick.mp3"));
+
 
         buttons[1].addListener(new ChangeListener() {
             @Override

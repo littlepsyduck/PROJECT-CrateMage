@@ -45,20 +45,20 @@ public class Player extends Sprite {
         right = new Animation[1];
         stand = new Animation[1];
 
-        playerTexture = new Texture("character/sheets/DinoSprites - tard.png");
+        playerTexture = new Texture("character/Full Spritesheet.png");
         TextureRegion[][] playerTextureRegion = TextureRegion.split(playerTexture, 24, 24);
-        TextureRegion[] rollFrames = new TextureRegion[24];
+        TextureRegion[] rollFrames = new TextureRegion[12*4];
         int index = 0;
-        for (int i = 0; i < 1; i++) {
-            for (int j = 0; j < 24; j++) {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 12; j++) {
                 rollFrames[index++] = playerTextureRegion[i][j];
             }
         }
-        down[0] = new Animation(0.2f, rollFrames[4], rollFrames[5], rollFrames[6], rollFrames[7], rollFrames[8], rollFrames[9]);
-        up[0] = new Animation(0.2f, rollFrames[4], rollFrames[5], rollFrames[6], rollFrames[7], rollFrames[8], rollFrames[9]);
-        left[0] = new Animation(0.2f, rollFrames[4], rollFrames[5], rollFrames[6], rollFrames[7], rollFrames[8], rollFrames[9]);
-        right[0] = new Animation(0.2f, rollFrames[4], rollFrames[5], rollFrames[6], rollFrames[7], rollFrames[8], rollFrames[9]);
-        stand[0] = new Animation(0.2f, rollFrames[0], rollFrames[1], rollFrames[2], rollFrames[3]);
+        down[0] = new Animation(0.08f, rollFrames[0], rollFrames[1], rollFrames[2], rollFrames[3], rollFrames[4], rollFrames[5], rollFrames[6], rollFrames[7], rollFrames[8], rollFrames[9], rollFrames[10], rollFrames[11]);
+        up[0] = new Animation(0.08f, rollFrames[12], rollFrames[13], rollFrames[14], rollFrames[15], rollFrames[16], rollFrames[17], rollFrames[18], rollFrames[19], rollFrames[20], rollFrames[21], rollFrames[22], rollFrames[23]);
+        left[0] = new Animation(0.08f, rollFrames[36], rollFrames[37], rollFrames[38], rollFrames[39], rollFrames[40], rollFrames[41], rollFrames[42], rollFrames[43], rollFrames[44], rollFrames[45], rollFrames[46], rollFrames[47]);
+        right[0] = new Animation(0.08f, rollFrames[24], rollFrames[25], rollFrames[26], rollFrames[27], rollFrames[28], rollFrames[29], rollFrames[30], rollFrames[31], rollFrames[32], rollFrames[33], rollFrames[34], rollFrames[35]);
+        stand[0] = new Animation(1f, rollFrames[0]);
         up[0].setPlayMode(Animation.PlayMode.LOOP);
         down[0].setPlayMode(Animation.PlayMode.LOOP);
         left[0].setPlayMode(Animation.PlayMode.LOOP);
@@ -68,7 +68,7 @@ public class Player extends Sprite {
 
     public void update(float dt) {
         checkUserInput();
-        setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2);
+        setPosition(body.getPosition().x - getWidth() / 2f, body.getPosition().y - getHeight() / 2f);
         setRegion(getFrame(dt));
         //System.out.println(body.getPosition().x + " " +  body.getPosition().y);
     }
@@ -102,24 +102,33 @@ public class Player extends Sprite {
 
         if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) {
             currentState = State.UP;
-            //body.applyLinearImpulse(new Vector2(0f, speed), body.getWorldCenter(), true);
-            velY = 1;
+
+            velY = 1f;
+
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+        else if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
             currentState = State.DOWN;
-            //body.applyLinearImpulse(new Vector2(0, -speed), body.getWorldCenter(), true);
-            velY = -1;
+
+            velY = -1f;
+
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+        else if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             currentState = State.LEFT;
-            //body.applyLinearImpulse(new Vector2(-speed, 0), body.getWorldCenter(), true);
-            velX = -1;
+
+            velX = -1f;
+
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+        else if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             currentState = State.RIGHT;
             //body.applyLinearImpulse(new Vector2(speed, 0), body.getWorldCenter(), true);
             velX = 1f;
         }
+
+        else if (!Gdx.input.isKeyPressed(Input.Keys.A) && !Gdx.input.isKeyPressed(Input.Keys.D) && !Gdx.input.isKeyPressed(Input.Keys.W) && !Gdx.input.isKeyPressed(Input.Keys.S) && !Gdx.input.isKeyPressed(Input.Keys.UP) && !Gdx.input.isKeyPressed(Input.Keys.DOWN) && !Gdx.input.isKeyPressed(Input.Keys.LEFT) && !Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            currentState = State.IDLE;
+        }
+
+
         body.setLinearVelocity(velX * speed, velY * speed);
 
     }
