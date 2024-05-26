@@ -4,14 +4,6 @@ com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
 		up: inhome
 		down: home
 		over: home
-		focused: home
-		disabled: home
-		checked: home
-	}
-	home: {
-		up: inhome
-		down: home
-		over: home
 	}
 }
 }
