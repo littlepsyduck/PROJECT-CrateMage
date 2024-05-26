@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.cratemage.CrateMage;
+import com.cratemage.controller.MyContactListener;
 import com.cratemage.controller.TileMapHelper;
 import com.cratemage.model.Box;
 import com.cratemage.model.Player;
@@ -36,6 +37,8 @@ public class GameScreen implements Screen {
     public OrthographicCamera staticCamera;
     public OrthographicCamera playerCamera;
 
+    MyContactListener listener;
+
     public int[] Layer1 = new int[]{0}, Layer2 = new int[]{3}, Layer3 = new int[]{1}; // Lấy index của layer
 
     //--HTH
@@ -51,6 +54,10 @@ public class GameScreen implements Screen {
         box2DDebugRenderer.setDrawContacts(false);
         this.tileMapHelper = new TileMapHelper(this);
         this.renderer = tileMapHelper.setupMap();
+
+        listener = new MyContactListener(boxes, world);
+        world.setContactListener(listener);
+
     }
 
     @Override
@@ -138,6 +145,7 @@ public class GameScreen implements Screen {
         // HTH
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
+
     }
 
     @Override
