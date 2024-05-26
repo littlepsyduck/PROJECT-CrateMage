@@ -1,7 +1,6 @@
 package com.cratemage.screen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -10,13 +9,17 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.cratemage.CrateMage;
+import com.cratemage.controller.MyContactListener;
 import com.cratemage.controller.TileMapHelper;
 import com.cratemage.model.Box;
 import com.cratemage.model.Player;
+
 import java.util.ArrayList;
 
 import static com.cratemage.common.constant.GameConstant.*;
@@ -34,10 +37,16 @@ public class GameScreen implements Screen {
     public OrthographicCamera staticCamera;
     public OrthographicCamera playerCamera;
 
+    MyContactListener listener;
 
     public int[] Layer1 = new int[]{0}, Layer2 = new int[]{3}, Layer3 = new int[]{1}; // Lấy index của layer
-    public GameScreen(CrateMage game){
-        this.world = new World(new Vector2(0,0), false);
+
+    //--HTH
+    private Stage stage;
+    private ButtonManager buttonManager;
+
+    public GameScreen(CrateMage game) {
+        this.world = new World(new Vector2(0, 0), false);
         this.game = game;
         this.box2DDebugRenderer = new Box2DDebugRenderer();
         box2DDebugRenderer.setDrawBodies(false);
@@ -46,18 +55,40 @@ public class GameScreen implements Screen {
         this.tileMapHelper = new TileMapHelper(this);
         this.renderer = tileMapHelper.setupMap();
 
+        listener = new MyContactListener(boxes, world);
+        world.setContactListener(listener);
+
     }
+
     @Override
     public void show() {
 //        staticCamera = new OrthographicCamera(512, 360);
-        game.camera = new OrthographicCamera(WINDOW_WIDTH / 5f,WINDOW_HEIGHT / 5f);
+
+        game.camera = new OrthographicCamera(WINDOW_WIDTH / 5f, WINDOW_HEIGHT / 5f);
+
 
         // -----DUNG NHAC
-        game.stopBackgroundMusic();
+        game.stopAllMusic();
         game.playMainMusic();
+
+        //--HTH
+        stage = new Stage(new ScreenViewport());
+        Gdx.input.setInputProcessor(stage);
+        buttonManager = new ButtonManager(game);
+        Button homeButton = buttonManager.createHomeButton();
+        Button menuButton = buttonManager.createMenuButton();
+        Button resetButton = buttonManager.creatResetButton();
+        Button musicButton = buttonManager.createMusicButton();
+
+
+        stage.addActor(homeButton);
+        stage.addActor(menuButton);
+        stage.addActor(resetButton);
+        stage.addActor(musicButton);
     }
-    public void update(float dt){
-        world.step(1/60f, 6, 2);
+
+    public void update(float dt) {
+        world.step(1 / 60f, 6, 2);
 
         Vector3 position = game.camera.position;
         position.x = player.body.getPosition().x * PPM * 10 / 10f;
@@ -78,12 +109,13 @@ public class GameScreen implements Screen {
         }
 
         player.update(dt);
-        for(Box box: boxes){
+        for (Box box : boxes) {
             box.update(dt);
         }
         game.camera.update();
 //        staticCamera.update();
     }
+
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -105,12 +137,16 @@ public class GameScreen implements Screen {
         game.batch.setProjectionMatrix(game.camera.combined);
         this.update(delta);
 
-        for(Box box: boxes){
+        for (Box box : boxes) {
             box.draw(game.batch);
         }
 
         player.draw(game.batch);
         game.batch.end();
+
+        // HTH
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
 
     }
 

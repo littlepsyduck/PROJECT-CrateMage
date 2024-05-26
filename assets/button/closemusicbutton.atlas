@@ -1,0 +1,269 @@
+
+closemusicbutton.png
+size: 2048, 2048
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+2
+  rotate: false
+  xy: 1, 803
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+3
+  rotate: false
+  xy: 1, 1
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+4
+  rotate: false
+  xy: 803, 803
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+5
+  rotate: false
+  xy: 803, 1
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+
+closemusicbutton2.png
+size: 2048, 2048
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+6
+  rotate: false
+  xy: 1, 803
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+7
+  rotate: false
+  xy: 1, 1
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+8
+  rotate: false
+  xy: 803, 803
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+9
+  rotate: false
+  xy: 803, 1
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+
+closemusicbutton3.png
+size: 2048, 2048
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+10
+  rotate: false
+  xy: 1, 803
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+Artboard 1
+  rotate: false
+  xy: 1, 1
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+Artboard 2
+  rotate: false
+  xy: 803, 803
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+closesound
+  rotate: false
+  xy: 803, 1
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+
+closemusicbutton4.png
+size: 2048, 2048
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+home
+  rotate: false
+  xy: 1, 803
+  size: 800, 800
+  split: 38, 19, 29, 27
+  pad: 0, 0, 0, 0
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+in2
+  rotate: false
+  xy: 1, 1
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+in3
+  rotate: false
+  xy: 803, 803
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+in4
+  rotate: false
+  xy: 803, 1
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+
+closemusicbutton5.png
+size: 2048, 2048
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+in5
+  rotate: false
+  xy: 1, 803
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+in6
+  rotate: false
+  xy: 1, 1
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+in7
+  rotate: false
+  xy: 803, 803
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+in8
+  rotate: false
+  xy: 803, 1
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+
+closemusicbutton6.png
+size: 2048, 2048
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+in10
+  rotate: false
+  xy: 1, 1
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+in9
+  rotate: false
+  xy: 1, 803
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+inclosesound
+  rotate: false
+  xy: 803, 803
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+inhome
+  rotate: false
+  xy: 803, 1
+  size: 800, 800
+  split: 38, 21, 29, 27
+  pad: 0, 0, 0, 0
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+
+closemusicbutton7.png
+size: 2048, 2048
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+inmenu
+  rotate: false
+  xy: 1, 803
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+inreset
+  rotate: false
+  xy: 1, 1
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+lock
+  rotate: false
+  xy: 803, 803
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+menu
+  rotate: false
+  xy: 803, 1
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+
+closemusicbutton8.png
+size: 2048, 2048
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+inopensound
+  rotate: false
+  xy: 1, 1
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+opensound
+  rotate: false
+  xy: 803, 803
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+reset
+  rotate: false
+  xy: 1, 803
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
