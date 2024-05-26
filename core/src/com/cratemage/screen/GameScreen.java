@@ -63,7 +63,9 @@ public class GameScreen implements Screen {
     @Override
     public void show() {
 //        staticCamera = new OrthographicCamera(512, 360);
+
         game.camera = new OrthographicCamera(WINDOW_WIDTH / 5f, WINDOW_HEIGHT / 5f);
+
 
         // -----DUNG NHAC
         game.stopAllMusic();
