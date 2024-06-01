@@ -25,12 +25,7 @@ public class MyContactListener implements ContactListener {
         for(Box box : boxes){
             if(fixtureA.getBody() == box.body || fixtureB.getBody() == box.body){
                 //System.out.println("has hit");
-                float velX = 0, velY = 0;
-                if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) velY = 1;
-                if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) velY = -1;
-                if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) velX = -1;
-                if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) velX = 1;
-                box.body.setLinearVelocity(velX, velY);
+                box.checkInput();
                 break;
             }
         }
