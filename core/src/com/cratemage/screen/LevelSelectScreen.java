@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.cratemage.CrateMage;
+import com.cratemage.controller.ButtonManager;
 
 public class LevelSelectScreen extends ApplicationAdapter implements Screen {
     Stage stage;

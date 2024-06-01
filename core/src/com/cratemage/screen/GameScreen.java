@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.cratemage.CrateMage;
+import com.cratemage.controller.ButtonManager;
 import com.cratemage.controller.MyContactListener;
 import com.cratemage.controller.TileMapHelper;
 import com.cratemage.model.Box;
