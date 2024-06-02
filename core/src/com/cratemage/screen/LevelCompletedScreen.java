@@ -24,6 +24,7 @@ public class LevelCompletedScreen implements Screen {
     ButtonManager buttonManager;
     Skin next, reset;
     public Label timeLabel, getTime;
+    Texture levelComplete;
 
     public LevelCompletedScreen(CrateMage game) {
         this.game = game;
@@ -36,13 +37,15 @@ public class LevelCompletedScreen implements Screen {
         Button menu = buttonManager.createMenuButton();
         Button sound = buttonManager.createMusicButton();
 
+        levelComplete = new Texture("PassLevel/levelComplete.png");
+
         timeLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.BLACK));
         getTime = new Label(String.format("%03d", game.time), new Label.LabelStyle(new BitmapFont(), Color.BLACK));
 
         table = new Table();
         table.setFillParent(true);
 
-        image = new Image(new Texture("PassLevel/levelComplete.png"));
+       // image = new Image(new Texture("PassLevel/levelComplete.png"));
 
         next = new Skin(Gdx.files.internal("PassLevel/nextButton.json"));
         reset = new Skin(Gdx.files.internal("PassLevel/replayButton.json"));
@@ -56,11 +59,11 @@ public class LevelCompletedScreen implements Screen {
             }
         });
 
-        table.add(image).center();
-        table.add(timeLabel);
-        table.add(getTime);
+        table.add(image).size(590, 390).center().colspan(2).padBottom(20);
         table.row();
-
+        table.add(timeLabel).center().padRight(10);
+        table.add(getTime).center().padLeft(10);
+        table.row();
         table.add(replay).pad(50);
         table.add(nextButton).pad(50);
 
@@ -68,6 +71,12 @@ public class LevelCompletedScreen implements Screen {
         stage.addActor(home);
         stage.addActor(sound);
         stage.addActor(menu);
+
+        nextButton.setPosition(330, 160);
+        replay.setPosition(560, 160);
+
+        stage.addActor(nextButton);
+        stage.addActor(replay);
     }
 
     @Override
@@ -79,6 +88,15 @@ public class LevelCompletedScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(1, 1, 1, 0);
         ScreenUtils.clear(1, 1, 1, 0);
+
+        batch.begin();
+        Texture background = new Texture("PassLevel/backgrendgame.png");
+        batch.draw(background, 0, 0, 1280, 720);
+        int width=800;
+        int height=530;
+        batch.draw(levelComplete,(1280-width)/2,(720-height)/2,width,height);
+
+        batch.end();
 
         stage.act(delta);
         stage.draw();
