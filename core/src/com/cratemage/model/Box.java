@@ -17,9 +17,8 @@ import static com.cratemage.common.constant.GameConstant.PPM;
 public class Box extends Sprite {
     public World world;
     public Body body;
-    public TextureRegion[][] region;
     public Texture texture;
-    public float speed, velX, velY;
+    public float speed;
     boolean contact = false;
     public Box(GameScreen screen, Body body) {
         this.world = screen.world;
@@ -32,5 +31,14 @@ public class Box extends Sprite {
     }
     public void update(float dt){
         setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2);
+    }
+
+    public void checkInput() {
+        float velX = 0, velY = 0;
+        if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) velY = 1;
+        if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) velY = -1;
+        if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) velX = -1;
+        if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) velX = 1;
+        body.setLinearVelocity(velX, velY);
     }
 }

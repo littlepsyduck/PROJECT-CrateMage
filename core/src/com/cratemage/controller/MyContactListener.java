@@ -1,21 +1,28 @@
 package com.cratemage.controller;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.cratemage.CrateMage;
 import com.cratemage.model.Box;
+import com.cratemage.model.Goal;
 import com.cratemage.model.Player;
+import com.cratemage.screen.LevelCompletedScreen;
 
 import java.util.ArrayList;
 
 public class MyContactListener implements ContactListener {
     public ArrayList<Box> boxes;
-    World world;
+    public Goal goal;
+    public World world;
+    public Player player;
+    public CrateMage game;
+    public boolean completed = false;
 
-    public MyContactListener(ArrayList<Box> boxes, World world) {
+    public MyContactListener(CrateMage game, World world, ArrayList<Box> boxes, Goal goal, Player player) {
         this.boxes = boxes;
         this.world = world;
+        this.goal = goal;
+        this.player = player;
+        this.game = game;
     }
 
     @Override
@@ -25,13 +32,12 @@ public class MyContactListener implements ContactListener {
         for(Box box : boxes){
             if(fixtureA.getBody() == box.body || fixtureB.getBody() == box.body){
                 //System.out.println("has hit");
-                float velX = 0, velY = 0;
-                if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) velY = 1;
-                if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) velY = -1;
-                if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) velX = -1;
-                if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) velX = 1;
-                box.body.setLinearVelocity(velX, velY);
-                break;
+                box.checkInput();
+                return;
+            }
+            if((fixtureA.getBody() == goal.body && fixtureB.getBody() == player.body) || (fixtureB.getBody() == goal.body && fixtureA.getBody() == player.body)){
+                completed = true;
+                return;
             }
         }
     }
