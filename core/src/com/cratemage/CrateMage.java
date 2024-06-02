@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 public class CrateMage extends Game {
 	public SpriteBatch batch;
 	public BitmapFont font;
+	public int time;
 	public OrthographicCamera camera;
 	private Music backgroundMusic;
 	private Music mainMusic;

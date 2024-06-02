@@ -1,0 +1,20 @@
+
+replayButton.png
+size: 256, 256
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+inplayagain
+  rotate: false
+  xy: 1, 135
+  size: 200, 64
+  orig: 200, 64
+  offset: 0, 0
+  index: -1
+playagain
+  rotate: false
+  xy: 1, 69
+  size: 200, 64
+  orig: 200, 64
+  offset: 0, 0
+  index: -1

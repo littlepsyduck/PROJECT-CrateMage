@@ -1,4 +1,4 @@
-package com.cratemage.screen;
+package com.cratemage.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
@@ -7,6 +7,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.cratemage.CrateMage;
+import com.cratemage.screen.GameScreen;
+import com.cratemage.screen.LevelSelectScreen;
+import com.cratemage.screen.MenuScreen;
 
 public class ButtonManager {
     private Skin homeskin;

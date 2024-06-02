@@ -12,13 +12,17 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.cratemage.CrateMage;
+import com.cratemage.controller.ButtonManager;
 import com.cratemage.controller.MyContactListener;
 import com.cratemage.controller.TileMapHelper;
 import com.cratemage.model.Box;
+import com.cratemage.model.Goal;
 import com.cratemage.model.Player;
+import com.cratemage.view.Hud;
 
 import java.util.ArrayList;
 
@@ -34,8 +38,8 @@ public class GameScreen implements Screen {
     public TiledMap map = new TmxMapLoader().load("Map/map_1.tmx");
     public OrthogonalTiledMapRenderer renderer;
     public Box2DDebugRenderer box2DDebugRenderer;
-    public OrthographicCamera staticCamera;
-    public OrthographicCamera playerCamera;
+    public Goal goal;
+    public Hud hud;
 
     MyContactListener listener;
 
@@ -55,13 +59,15 @@ public class GameScreen implements Screen {
         this.tileMapHelper = new TileMapHelper(this);
         this.renderer = tileMapHelper.setupMap();
 
-        listener = new MyContactListener(boxes, world);
+        listener = new MyContactListener(game, world, boxes, goal, player);
         world.setContactListener(listener);
 
+        hud = new Hud(game.batch);
     }
 
     @Override
     public void show() {
+
 //        staticCamera = new OrthographicCamera(512, 360);
 
         game.camera = new OrthographicCamera(WINDOW_WIDTH / 5f, WINDOW_HEIGHT / 5f);
@@ -79,7 +85,6 @@ public class GameScreen implements Screen {
         Button menuButton = buttonManager.createMenuButton();
         Button resetButton = buttonManager.creatResetButton();
         Button musicButton = buttonManager.createMusicButton();
-
 
         stage.addActor(homeButton);
         stage.addActor(menuButton);
@@ -113,7 +118,7 @@ public class GameScreen implements Screen {
             box.update(dt);
         }
         game.camera.update();
-//        staticCamera.update();
+        hud.update(dt);
     }
 
     @Override
@@ -124,17 +129,16 @@ public class GameScreen implements Screen {
         // render map theo layer index
         renderer.render(Layer1);
         renderer.render(Layer3);
-//        renderer.render(Layer2);
+        renderer.render(Layer2);
 
         box2DDebugRenderer.render(world, game.camera.combined.scl(PPM));
 //        box2DDebugRenderer.render(world, staticCamera.combined.scl(PPM));
 
         stateTime += delta;
 
-//        game.batch.setProjectionMatrix(staticCamera.combined);
-
         game.batch.begin();
         game.batch.setProjectionMatrix(game.camera.combined);
+
         this.update(delta);
 
         for (Box box : boxes) {
@@ -143,11 +147,17 @@ public class GameScreen implements Screen {
 
         player.draw(game.batch);
         game.batch.end();
+        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+        hud.stage.draw();
 
+        if(listener.completed) {
+            game.time = hud.getTime();
+            //System.out.println(game.time);
+            game.setScreen(new LevelCompletedScreen(game));
+        }
         // HTH
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
-
     }
 
     @Override
@@ -172,7 +182,10 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
+        stage.dispose();
         renderer.dispose();
         box2DDebugRenderer.dispose();
+        hud.dispose();
+        world.dispose();
     }
 }

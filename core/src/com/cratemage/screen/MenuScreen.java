@@ -12,6 +12,7 @@ import com.cratemage.CrateMage;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.cratemage.controller.ButtonManager;
 
 
 public class MenuScreen implements Screen {
