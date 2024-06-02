@@ -150,7 +150,7 @@ public class GameScreen implements Screen {
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
 
-        if(listener.completed || Gdx.input.isTouched()) {
+        if(listener.completed) {
             game.time = hud.getTime();
             //System.out.println(game.time);
             game.setScreen(new LevelCompletedScreen(game));
