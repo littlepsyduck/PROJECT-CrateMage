@@ -1,5 +1,6 @@
 package com.cratemage.view;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -11,7 +12,6 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.cratemage.common.constant.GameConstant;
-import sun.tools.jconsole.Tab;
 
 public class Hud implements Disposable {
     public Stage stage;
@@ -31,14 +31,17 @@ public class Hud implements Disposable {
         viewport = new FitViewport(GameConstant.WINDOW_WIDTH, GameConstant.WINDOW_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, batch);
 
+        BitmapFont customFont = new BitmapFont(Gdx.files.internal("Map/myfont.fnt"));
+        Label.LabelStyle labelStyle = new Label.LabelStyle(customFont, Color.WHITE);
+
+        countTimeLabel = new Label(String.format("%03d", worldTimer), labelStyle);
+        timeLabel = new Label("TIME", labelStyle);
+        levelLabel = new Label("1", labelStyle);
+        worldLabel = new Label("LEVEL", labelStyle);
+
         Table table = new Table();
         table.top();
         table.setFillParent(true);
-
-        countTimeLabel = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        timeLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        levelLabel = new Label("1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        worldLabel = new Label("LEVEL", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         table.add(worldLabel).expandX().padTop(10);
         table.add(timeLabel).expandX().padTop(10);
@@ -52,14 +55,14 @@ public class Hud implements Disposable {
 
     public void update(float dt) {
         timeCount += dt;
-        if(timeCount >= 1){
+        if (timeCount >= 1) {
             worldTimer++;
             countTimeLabel.setText(String.format("%03d", worldTimer));
             timeCount = 0;
         }
     }
 
-    public int getTime(){
+    public int getTime() {
         return worldTimer;
     }
 
