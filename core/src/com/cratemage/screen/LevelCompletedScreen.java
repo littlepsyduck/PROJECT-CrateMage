@@ -62,6 +62,14 @@ public class LevelCompletedScreen implements Screen {
             }
         });
 
+        nextButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                game.levelCurrent++;
+                game.setScreen(new GameScreen(game));
+            }
+        });
+
         nextButton.setPosition(330, 160);
         replay.setPosition(560, 160);
 

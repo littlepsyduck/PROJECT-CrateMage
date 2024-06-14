@@ -45,33 +45,28 @@ public class LevelSelectScreen extends ApplicationAdapter implements Screen {
         stage.addActor(homeButton);
         stage.addActor(musicButton);
 
-
         Button[] buttons = new Button[11];
-        buttons[1] = new Button(skin, "level1");
-        buttons[2] = new Button(skin, "level2");
-        buttons[3] = new Button(skin, "level3");
-        buttons[4] = new Button(skin, "level4");
-        buttons[5] = new Button(skin, "level5");
-        buttons[6] = new Button(skin, "level6");
-        buttons[7] = new Button(skin, "level7");
-        buttons[8] = new Button(skin, "level8");
-        buttons[9] = new Button(skin, "level9");
-        buttons[10] = new Button(skin, "level10");
 
-        //---sound button
+        for(int i = 1; i <= 10; i++){
+            String styleName = "level" + i;
+            buttons[i] = new Button(skin, styleName);
 
-        clickSound = Gdx.audio.newMusic(Gdx.files.internal("Sound/MouseClick.mp3"));
-
-
-        buttons[1].addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                if (game.isSoundOn()) {
-                    clickSound.play();
+            int finalI = i;
+            buttons[i].addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    if (game.isSoundOn()) {
+                        clickSound.play();
+                    }
+                    game.levelCurrent = finalI;
+                    game.setScreen(new GameScreen(game));
                 }
-                game.setScreen(new GameScreen(game));
-            }
-        });
+            });
+        }
+        // Disable buttons for levels that are not available
+        for (int i = game.levelUnlocked + 1; i <= 10; i++) {
+            buttons[i].setDisabled(true);
+        }
 
         for (int i = 1; i <= 5; i++) {
             table.add(buttons[i]).pad(50);
@@ -81,12 +76,11 @@ public class LevelSelectScreen extends ApplicationAdapter implements Screen {
             table.add(buttons[i]).pad(50);
         }
 
-        // Disable buttons for levels that are not available
-        for (int i = 3; i <= 10; i++) {
-            buttons[i].setDisabled(true);
-        }
-
         stage.addActor(table);
+
+        //---sound button
+
+        clickSound = Gdx.audio.newMusic(Gdx.files.internal("Sound/MouseClick.mp3"));
     }
 
     @Override
