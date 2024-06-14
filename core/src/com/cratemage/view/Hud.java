@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.cratemage.CrateMage;
 import com.cratemage.common.constant.GameConstant;
 
 public class Hud implements Disposable {
@@ -24,7 +25,7 @@ public class Hud implements Disposable {
     private Label levelLabel;
     private Label worldLabel;
 
-    public Hud(SpriteBatch batch) {
+    public Hud(CrateMage game, SpriteBatch batch) {
         worldTimer = 0;
         timeCount = 0;
 
@@ -36,7 +37,7 @@ public class Hud implements Disposable {
 
         countTimeLabel = new Label(String.format("%03d", worldTimer), labelStyle);
         timeLabel = new Label("TIME", labelStyle);
-        levelLabel = new Label("1", labelStyle);
+        levelLabel = new Label(Integer.toString(game.levelCurrent), labelStyle);
         worldLabel = new Label("LEVEL", labelStyle);
 
         Table table = new Table();

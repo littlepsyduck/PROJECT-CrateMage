@@ -66,7 +66,7 @@ public class GameScreen implements Screen {
         listener = new MyContactListener(game, world, boxes, goal, player);
         world.setContactListener(listener);
 
-        hud = new Hud(game.batch);
+        hud = new Hud(game, game.batch);
 
     }
 
