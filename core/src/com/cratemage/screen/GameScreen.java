@@ -35,7 +35,7 @@ public class GameScreen implements Screen {
     public Player player;
     public ArrayList<Box> boxes = new ArrayList<>();
     public TileMapHelper tileMapHelper;
-    public TiledMap map = new TmxMapLoader().load("Map/map_1.tmx");
+    public TiledMap map;
     public OrthogonalTiledMapRenderer renderer;
     public Box2DDebugRenderer box2DDebugRenderer;
     public Goal goal;
@@ -43,7 +43,7 @@ public class GameScreen implements Screen {
 
     MyContactListener listener;
 
-    public int[] Layer1 = new int[]{0}, Layer2 = new int[]{3}, Layer3 = new int[]{1}; // Lấy index của layer
+    public int[] Layer1 = new int[]{0}, Layer2 = new int[]{1}, Layer3 = new int[]{3}; // Lấy index của layer
 
     //--HTH
     private Stage stage;
@@ -52,11 +52,15 @@ public class GameScreen implements Screen {
     public GameScreen(CrateMage game) {
         this.world = new World(new Vector2(0, 0), false);
         this.game = game;
+
         this.box2DDebugRenderer = new Box2DDebugRenderer();
         box2DDebugRenderer.setDrawBodies(false);
         box2DDebugRenderer.setDrawJoints(false);
         box2DDebugRenderer.setDrawContacts(false);
-        this.tileMapHelper = new TileMapHelper(this);
+
+        String fileNameMap = "Map/map_" + game.levelCurrent + ".tmx";
+        map = new TmxMapLoader().load(fileNameMap);
+        this.tileMapHelper = new TileMapHelper(this, fileNameMap);
         this.renderer = tileMapHelper.setupMap();
 
         listener = new MyContactListener(game, world, boxes, goal, player);
@@ -128,8 +132,8 @@ public class GameScreen implements Screen {
         renderer.setView(game.camera);
         // render map theo layer index
         renderer.render(Layer1);
-        renderer.render(Layer3);
         renderer.render(Layer2);
+        renderer.render(Layer3);
 
         box2DDebugRenderer.render(world, game.camera.combined.scl(PPM));
 //        box2DDebugRenderer.render(world, staticCamera.combined.scl(PPM));
@@ -152,6 +156,7 @@ public class GameScreen implements Screen {
 
         if(listener.completed) {
             game.time = hud.getTime();
+            game.levelUnlocked = game.levelCurrent + 1;
             //System.out.println(game.time);
             game.setScreen(new LevelCompletedScreen(game));
         }
