@@ -8,7 +8,10 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -20,7 +23,6 @@ public class LevelCompletedScreen implements Screen {
     Stage stage;
     SpriteBatch batch;
     Image image;
-    Table table;
     ButtonManager buttonManager;
     Skin next, reset;
     public Label timeLabel, getTime;
@@ -32,6 +34,9 @@ public class LevelCompletedScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
         batch = (SpriteBatch) stage.getBatch();
 
+        BitmapFont customFont = new BitmapFont(Gdx.files.internal("PassLevel/myfont.fnt"));
+        Label.LabelStyle labelStyle = new Label.LabelStyle(customFont, Color.WHITE);
+
         buttonManager = new ButtonManager(game);
         Button home = buttonManager.createHomeButton();
         Button menu = buttonManager.createMenuButton();
@@ -39,13 +44,11 @@ public class LevelCompletedScreen implements Screen {
 
         levelComplete = new Texture("PassLevel/levelComplete.png");
 
-        timeLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.BLACK));
-        getTime = new Label(String.format("%03d", game.time), new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        timeLabel = new Label("TIME ", labelStyle);
+        getTime = new Label(String.format("%03d", game.time), labelStyle);
 
-        table = new Table();
-        table.setFillParent(true);
-
-       // image = new Image(new Texture("PassLevel/levelComplete.png"));
+        timeLabel.setPosition(430, 250);
+        getTime.setPosition(610, 250);
 
         next = new Skin(Gdx.files.internal("PassLevel/nextButton.json"));
         reset = new Skin(Gdx.files.internal("PassLevel/replayButton.json"));
@@ -59,24 +62,17 @@ public class LevelCompletedScreen implements Screen {
             }
         });
 
-        table.add(image).size(590, 390).center().colspan(2).padBottom(20);
-        table.row();
-        table.add(timeLabel).center().padRight(10);
-        table.add(getTime).center().padLeft(10);
-        table.row();
-        table.add(replay).pad(50);
-        table.add(nextButton).pad(50);
-
-        stage.addActor(table);
-        stage.addActor(home);
-        stage.addActor(sound);
-        stage.addActor(menu);
-
         nextButton.setPosition(330, 160);
         replay.setPosition(560, 160);
 
+        // Thêm các Actor vào Stage
+        stage.addActor(timeLabel);
+        stage.addActor(getTime);
         stage.addActor(nextButton);
         stage.addActor(replay);
+        stage.addActor(home);
+        stage.addActor(sound);
+        stage.addActor(menu);
     }
 
     @Override
@@ -92,9 +88,9 @@ public class LevelCompletedScreen implements Screen {
         batch.begin();
         Texture background = new Texture("PassLevel/backgrendgame.png");
         batch.draw(background, 0, 0, 1280, 720);
-        int width=800;
-        int height=530;
-        batch.draw(levelComplete,(1280-width)/2,(720-height)/2,width,height);
+        int width = 800;
+        int height = 530;
+        batch.draw(levelComplete, (1280 - width) / 2, (720 - height) / 2, width, height);
 
         batch.end();
 
