@@ -1,0 +1,20 @@
+
+nameText.png
+size: 1024, 1024
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+textfield
+  rotate: false
+  xy: 1, 1
+  size: 389, 66
+  orig: 389, 66
+  offset: 0, 0
+  index: -1
+myfont
+  rotate: false
+  xy: 1, 69
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
