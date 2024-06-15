@@ -1,5 +1,4 @@
-# PROJECT-CrateMage
-> This is the second final assignment of the Object Oriented Programming course, organized by the ProPTIT club.
+# CrateMage - ProGameCup
 
 > ProGameCup is a competition hosted by ProPTIT. After OOP Course for club member in ProPTIT, we will have a competition to test our knowledge and skills. This competition is a good chance for us to improve our coding skills and learn from each other.
 
@@ -62,24 +61,32 @@ At the end of each week, team merges `develop` into `main` to release a new vers
 
 ```
 - assets 
-  - images
+  - button
+  - character
+  - levelSelect
+  - login
+  - map
+  - menu
+  - levelPass
   - sounds
+  - tutorial
 - core
   - common
-  - config
   - view
   - model
   - controller
+  - screen
+  - CrateMage(main)
 - desktop
-- ios
+  - DesktopLauncher
 ...
 ```
 
 Explanation:
-- **assets:** Chứa các tài nguyên như hình ảnh, âm thanh
-- **core:** Chứa các class chính của game như model, view, controller
-- **desktop, ios, android:** Chứa các class để chạy trên các nền tảng khác nhau"
-- ...
+- **assets:** Contains resources like images and sounds.
+- **core:**  Contains the main classes of the game, such as model, view, and controller.
+- **desktop:** Contains platform-specific classes for running the game on different platforms.
+
 
 
 

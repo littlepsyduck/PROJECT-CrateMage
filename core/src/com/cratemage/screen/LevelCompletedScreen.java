@@ -34,7 +34,7 @@ public class LevelCompletedScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
         batch = (SpriteBatch) stage.getBatch();
 
-        BitmapFont customFont = new BitmapFont(Gdx.files.internal("PassLevel/myfont.fnt"));
+        BitmapFont customFont = new BitmapFont(Gdx.files.internal("levelPass/myfont.fnt"));
         Label.LabelStyle labelStyle = new Label.LabelStyle(customFont, Color.WHITE);
 
         buttonManager = new ButtonManager(game);
@@ -42,7 +42,7 @@ public class LevelCompletedScreen implements Screen {
         Button menu = buttonManager.createMenuButton();
         Button sound = buttonManager.createMusicButton();
 
-        levelComplete = new Texture("PassLevel/levelComplete.png");
+        levelComplete = new Texture("levelPass/levelComplete.png");
 
         timeLabel = new Label("TIME ", labelStyle);
         getTime = new Label(String.format("%03d", game.time), labelStyle);
@@ -50,8 +50,8 @@ public class LevelCompletedScreen implements Screen {
         timeLabel.setPosition(430, 250);
         getTime.setPosition(610, 250);
 
-        next = new Skin(Gdx.files.internal("PassLevel/nextButton.json"));
-        reset = new Skin(Gdx.files.internal("PassLevel/replayButton.json"));
+        next = new Skin(Gdx.files.internal("levelPass/nextButton.json"));
+        reset = new Skin(Gdx.files.internal("levelPass/replayButton.json"));
 
         Button nextButton = new Button(next);
         Button replay = new Button(reset);
@@ -94,7 +94,7 @@ public class LevelCompletedScreen implements Screen {
         ScreenUtils.clear(1, 1, 1, 0);
 
         batch.begin();
-        Texture background = new Texture("PassLevel/backgrendgame.png");
+        Texture background = new Texture("levelPass/backgrendgame.png");
         batch.draw(background, 0, 0, 1280, 720);
         int width = 800;
         int height = 530;
