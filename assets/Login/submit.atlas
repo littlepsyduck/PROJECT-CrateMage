@@ -1,0 +1,20 @@
+
+submit.png
+size: 1024, 1024
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+insubmit
+  rotate: false
+  xy: 1, 489
+  size: 721, 231
+  orig: 721, 231
+  offset: 0, 0
+  index: -1
+submit
+  rotate: false
+  xy: 1, 256
+  size: 721, 231
+  orig: 721, 231
+  offset: 0, 0
+  index: -1
