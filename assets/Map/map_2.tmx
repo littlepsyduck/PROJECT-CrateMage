@@ -98,7 +98,7 @@
    <polygon points="0,0 15.5,0.5 15.5,-79.5 -0.5,-79.5"/>
   </object>
   <object id="85" name="player" x="66.5833" y="130.583" width="10.8333" height="10.8333"/>
-  <object id="87" name="goal" x="386.167" y="287.333" width="13.6667" height="17.3333"/>
+  <object id="87" name="goal" x="394.167" y="287.583" width="13.6667" height="17.3333"/>
   <object id="88" name="box" x="178.25" y="98" width="10.5" height="11"/>
   <object id="89" name="box" x="354.75" y="98" width="10.5" height="11"/>
   <object id="90" name="box" x="434.75" y="162" width="10.5" height="11"/>
