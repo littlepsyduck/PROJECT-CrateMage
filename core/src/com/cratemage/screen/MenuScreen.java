@@ -127,7 +127,7 @@ public class MenuScreen implements Screen {
                     clickSound.play();
                 }
                 this.dispose();
-                game.setScreen(new LevelSelectScreen(game));
+                game.setScreen(new Login(game));
             }
         } else {
             batch.draw(playButtonInactive, x, y, PLAY1_BUTTON_WIDTH, PLAY1_BUTTON_HEIGHT);
