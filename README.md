@@ -41,22 +41,22 @@ At the end of each week, team merges `develop` into `main` to release a new vers
 
 ## 2. Project Introduction
 
-**Description:** [Dự án game làm cái gì]
+> **Description:** Crate Mage is an engaging and strategic puzzle game where players take on the role of a powerful mage who manipulates crates to overcome obstacles, solve intricate puzzles, and defeat enemies. The game combines elements of classic block-pushing puzzles with magical abilities, creating a unique and challenging gameplay experience.
 
 ## 3. Main Features
 
-- [Chức năng 1]
-- [Chức năng 2]
-- [Chức năng 3]
-- [Chức năng 4]
+- **Level Progression:** Advance through increasingly difficult levels, each designed with unique challenges and requiring innovative solutions.
+- **Puzzle Mechanics:** Players must manipulate crates to navigate through levels and reach goals.
+- **Time Clock:** A stopwatch will be activated at the start of the level and show the time when the player reaches goal.
 
 ## 4. Technology
 
 ### 4.1. Technologies Used
-- [Công nghệ 1]
-- [Công nghệ 2]
-- [Công nghệ 3]
-- [Công nghệ 4]
+- **Programming Language:** Java
+- **Framework:** libGDX
+- **Graphics:** Adobe Photoshop and Adobe Illustrator
+- **Sound:** Adobe Premiere Pro for sound editing
+- **Version Control:** Git with GitHub for repository hosting
 
 ### 4.2 Project Structure
 
