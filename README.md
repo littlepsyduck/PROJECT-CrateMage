@@ -9,13 +9,13 @@
 **Project Link:** [GitHub Link](https://github.com/littlepsyduck/PROJECT-CrateMage)
 
 **Members:**
-- Nguyễn Bá Việt Hoàng
-- Hoàng Trung Hiếu
-- Đặng Huyền Trang
+- [Nguyễn Bá Việt Hoàng](https://github.com/littlepsyduck)
+- [Hoàng Trung Hiếu](https://github.com/jinjja9)
+- [Đặng Huyền Trang](https://github.com/DHuyenTrang)
 
 **Mentors:**
-- Nguyễn Quốc Hưng
-- Nguyễn Đăng Minh
+- [Nguyễn Quốc Hưng](https://github.com/quochung-cyou)
+- [Nguyễn Đăng Minh](https://github.com/monkeydminh49)
 
 ### Working Model
 
