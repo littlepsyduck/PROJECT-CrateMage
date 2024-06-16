@@ -42,7 +42,7 @@ public class LevelCompletedScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
         batch = (SpriteBatch) stage.getBatch();
 
-        customFont = new BitmapFont(Gdx.files.internal("PassLevel/myfont.fnt"));
+        customFont = new BitmapFont(Gdx.files.internal("levelPass/myfont.fnt"));
         labelStyle = new Label.LabelStyle(customFont, Color.WHITE);
 
         buttonManager = new ButtonManager(game);
