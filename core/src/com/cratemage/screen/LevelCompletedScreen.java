@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import static java.lang.Math.min;
+
 public class LevelCompletedScreen implements Screen {
     public CrateMage game;
     Stage stage;
@@ -103,7 +105,7 @@ public class LevelCompletedScreen implements Screen {
             }
         });
         int posX = 870, posY = 380;
-        for (int i = 0; i < 3; i++){
+        for (int i = 0; i < min(3, timePassLevel.size()); i++){
             rank[i] = new Label(timePassLevel.get(i), labelStyle);
             rank[i].setPosition(posX, posY);
             rank[i].setFontScale(0.7f);
