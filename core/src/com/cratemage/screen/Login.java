@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -69,6 +71,22 @@ public class Login implements Screen {
         nameText.setSize(500, 75);
         nameText.setMessageText("ENTER YOUR NAME");
         nameText.setAlignment(1);
+
+        nameText.addListener(new InputListener() {
+            @Override
+            public boolean keyDown(InputEvent event, int keycode) {
+                if (keycode == 66) { // 66 là keycode của phím ENTER
+                    if (game.isSoundOn()) {
+                        clickSound.play();
+                    }
+                    game.namePlayer = nameText.getText();
+                    game.setScreen(new LevelSelectScreen(game));
+                    return true;
+                }
+                return false;
+            }
+        });
+
         return nameText;
     }
 
