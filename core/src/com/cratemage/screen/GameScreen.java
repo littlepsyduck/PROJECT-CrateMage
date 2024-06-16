@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.cratemage.CrateMage;
 import com.cratemage.controller.ButtonManager;
+import com.cratemage.controller.DataProcess;
 import com.cratemage.controller.MyContactListener;
 import com.cratemage.controller.TileMapHelper;
 import com.cratemage.model.Box;
@@ -27,6 +28,7 @@ import com.cratemage.view.Hud;
 import java.util.ArrayList;
 
 import static com.cratemage.common.constant.GameConstant.*;
+import static java.lang.Integer.max;
 
 public class GameScreen implements Screen {
     public float stateTime;
@@ -48,6 +50,7 @@ public class GameScreen implements Screen {
     //--HTH
     private Stage stage;
     private ButtonManager buttonManager;
+    public DataProcess dataProcess = new DataProcess();
 
     public GameScreen(CrateMage game) {
         this.world = new World(new Vector2(0, 0), false);
@@ -157,7 +160,8 @@ public class GameScreen implements Screen {
 
         if(listener.completed) {
             game.time = hud.getTime();
-            game.levelUnlocked = game.levelCurrent + 1;
+            game.levelUnlocked = max(game.levelCurrent + 1, game.levelUnlocked);
+            dataProcess.writeResult(game.levelCurrent, game.namePlayer, game.time);
             //System.out.println(game.time);
             game.setScreen(new LevelCompletedScreen(game));
         }

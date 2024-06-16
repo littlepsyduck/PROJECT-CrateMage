@@ -30,6 +30,7 @@ public class MyContactListener implements ContactListener {
         Fixture fixtureA = contact.getFixtureA();
         Fixture fixtureB = contact.getFixtureB();
         for(Box box : boxes){
+            if(fixtureA.getBody() == box.body && fixtureB.getBody() == box.body) return;
             if(fixtureA.getBody() == box.body || fixtureB.getBody() == box.body){
                 //System.out.println("has hit");
                 box.checkInput();
