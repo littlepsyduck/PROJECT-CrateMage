@@ -119,17 +119,17 @@ Explanation:
 
 - Sau khi sử dụng Object Pool, hiệu năng game đã được cải thiện, fps tăng lên đáng kể. Từ *30fps lên 60fps* (Rõ ràng hơn với số liệu cụ thể)
 
-### Vấn Đề 2: [Mô tả vấn đề]
-**Ví dụ:** Có quá nhiều class quái khác nhau, dù chúng có nhiều điểm chung
+### Issue 2: [Mô tả vấn đề]
+**Ví dụ:** Game gặp phải vấn đề hiệu năng kém, fps thấp dù không có nhiều đối tượng trên màn hình
 
+### Actions Taken to Resolve
 
-### Hành Động Để Giải Quyết
+**Solution:** Do việc tạo object quá nhiều, nên dẫn tới tràn ram và giảm hiệu năng
+- Sử dụng Design Pattern Object Pool để tái sử dụng object. Khi object không còn sử dụng, sẽ được đưa vào pool để sử dụng lại.
 
-**Giải pháp:** Sử dụng Design Pattern Builder để tạo các object quái với các thuộc tính khác nhau mà không cần tạo nhiều class. Ngoài ra sử dụng Strategy Pattern để tạo các hành vi khác nhau cho các object quái mà không cần tạo nhiều class.
+### Result
 
-### Kết Quả
-
-- Sau khi sử dụng Builder và Strategy Pattern, việc tạo các object quái đã trở nên dễ dàng hơn, không cần tạo nhiều class. Có thể chỉ cần config các thuộc tính và hành vi cho object quái mà không cần tạo nhiều class.
+- Sau khi sử dụng Object Pool, hiệu năng game đã được cải thiện, fps tăng lên đáng kể. Từ *30fps lên 60fps* (Rõ ràng hơn với số liệu cụ thể)
 
 ## 7. Conclusion
 
