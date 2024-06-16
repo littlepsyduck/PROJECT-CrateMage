@@ -32,7 +32,7 @@ Team uses Gitflow to manage code. Each member creates a branch from `develop` fo
     - `develop`: Contains the latest code that has passed review and testing.
     - `feature/`: Branches that contain ongoing development work, which are short-lived and merged into `develop` upon completion.
 
-![alt text](image.png)
+![alt text](images/image.png)
 
 At the end of each week, team merges `develop` into `main` to release a new version.
 
@@ -92,10 +92,22 @@ Explanation:
 ## 5. Demo Images and Videos
 
 **Demo Images:**
-![Ảnh Demo](#)
+
+![alt text](images/1.png)
+
+![alt text](images/2.png)
+
+![alt text](images/3.png)
+
+![alt text](images/4.png)
+
+![alt text](images/5.png)
+
+![alt text](images/6.png)
+
 
 **Demo Videos:**
-[Video Link](#)
+[Video Link](https://drive.google.com/file/d/1_Rz13CM7dWsri43SrvhGCGbD9k8VDsOO/view?usp=sharing)
 
 
 
@@ -140,7 +152,9 @@ Explanation:
 
 ## 7. Conclusion
 
-**Achieved Results:** The game has completed most of the basic functions, and can operate normally. This is also our group's first product, and also our first group product, so it may not be complete yet. 
+**Achieved Results:** 
+- The game has completed most of the basic functions, and can operate normally.
+- This is also our group's first product, and also our first group product, so it may not be complete yet. 
 
 **Future Development Direction:** 
 - There are still some features that can be improved, such as interaction between crates.
