@@ -128,7 +128,6 @@ public class Player extends Sprite {
             currentState = State.IDLE;
         }
 
-
         body.setLinearVelocity(velX * speed, velY * speed);
 
     }

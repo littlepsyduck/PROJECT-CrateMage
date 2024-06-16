@@ -1,9 +1,11 @@
 package com.cratemage.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -12,11 +14,11 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.cratemage.CrateMage;
 import com.cratemage.controller.ButtonManager;
+import com.cratemage.controller.DataProcess;
 import com.cratemage.controller.MyContactListener;
 import com.cratemage.controller.TileMapHelper;
 import com.cratemage.model.Box;
@@ -27,6 +29,7 @@ import com.cratemage.view.Hud;
 import java.util.ArrayList;
 
 import static com.cratemage.common.constant.GameConstant.*;
+import static java.lang.Integer.max;
 
 public class GameScreen implements Screen {
     public float stateTime;
@@ -35,7 +38,7 @@ public class GameScreen implements Screen {
     public Player player;
     public ArrayList<Box> boxes = new ArrayList<>();
     public TileMapHelper tileMapHelper;
-    public TiledMap map = new TmxMapLoader().load("Map/map_1.tmx");
+    public TiledMap map;
     public OrthogonalTiledMapRenderer renderer;
     public Box2DDebugRenderer box2DDebugRenderer;
     public Goal goal;
@@ -43,26 +46,32 @@ public class GameScreen implements Screen {
 
     MyContactListener listener;
 
-    public int[] Layer1 = new int[]{0}, Layer2 = new int[]{3}, Layer3 = new int[]{1}; // Lấy index của layer
+    public int[] Layer1 = new int[]{0}, Layer2 = new int[]{1}, Layer3 = new int[]{3}; // Lấy index của layer
 
     //--HTH
     private Stage stage;
     private ButtonManager buttonManager;
+    public DataProcess dataProcess = new DataProcess();
 
     public GameScreen(CrateMage game) {
         this.world = new World(new Vector2(0, 0), false);
         this.game = game;
+
         this.box2DDebugRenderer = new Box2DDebugRenderer();
         box2DDebugRenderer.setDrawBodies(false);
         box2DDebugRenderer.setDrawJoints(false);
         box2DDebugRenderer.setDrawContacts(false);
-        this.tileMapHelper = new TileMapHelper(this);
+
+        String fileNameMap = "Map/map_" + game.levelCurrent + ".tmx";
+        map = new TmxMapLoader().load(fileNameMap);
+        this.tileMapHelper = new TileMapHelper(this, fileNameMap);
         this.renderer = tileMapHelper.setupMap();
 
         listener = new MyContactListener(game, world, boxes, goal, player);
         world.setContactListener(listener);
 
-        hud = new Hud(game.batch);
+        hud = new Hud(game, game.batch);
+
     }
 
     @Override
@@ -119,6 +128,11 @@ public class GameScreen implements Screen {
         }
         game.camera.update();
         hud.update(dt);
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+            game.setScreen(new GameScreen(game));
+        }
+
     }
 
     @Override
@@ -128,8 +142,8 @@ public class GameScreen implements Screen {
         renderer.setView(game.camera);
         // render map theo layer index
         renderer.render(Layer1);
-        renderer.render(Layer3);
         renderer.render(Layer2);
+        renderer.render(Layer3);
 
         box2DDebugRenderer.render(world, game.camera.combined.scl(PPM));
 //        box2DDebugRenderer.render(world, staticCamera.combined.scl(PPM));
@@ -152,6 +166,8 @@ public class GameScreen implements Screen {
 
         if(listener.completed) {
             game.time = hud.getTime();
+            game.levelUnlocked = max(game.levelCurrent + 1, game.levelUnlocked);
+            dataProcess.writeResult(game.levelCurrent, game.namePlayer, game.time);
             //System.out.println(game.time);
             game.setScreen(new LevelCompletedScreen(game));
         }

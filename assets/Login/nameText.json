@@ -1,0 +1,39 @@
+{
+com.badlogic.gdx.graphics.g2d.BitmapFont: {
+	myfont: {
+		file: myfont.fnt
+		scaledSize: -1
+		markupEnabled: false
+		flip: false
+	}
+}
+com.badlogic.gdx.graphics.Color: {
+	RGBA_205_205_205_255: {
+		r: 0.8039216
+		g: 0.8039216
+		b: 0.8039216
+		a: 1
+	}
+	RGBA_255_255_255_255: {
+		r: 1
+		g: 1
+		b: 1
+		a: 1
+	}
+	RGBA_2_2_2_255: {
+		r: 0.007843138
+		g: 0.007843138
+		b: 0.007843138
+		a: 1
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
+	default: {
+		font: myfont
+		fontColor: RGBA_255_255_255_255
+		background: textfield
+		messageFont: myfont
+		messageFontColor: RGBA_205_205_205_255
+	}
+}
+}

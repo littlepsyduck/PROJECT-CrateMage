@@ -22,16 +22,18 @@ import static com.cratemage.common.constant.GameConstant.PPM;
 
 
 public class TileMapHelper {
-    public static TiledMap map;
+    public TiledMap map;
     public GameScreen gameScreen;
+    public String fileName;
 
 
-    public TileMapHelper(GameScreen gameScreen){
+    public TileMapHelper(GameScreen gameScreen, String fileNameMap){
         this.gameScreen = gameScreen;
+        fileName = fileNameMap;
     }
 
     public OrthogonalTiledMapRenderer setupMap(){
-        map = new TmxMapLoader().load("Map/map_1.tmx");
+        map = new TmxMapLoader().load(fileName);
         parseMapObjects(map.getLayers().get("block").getObjects());
         return new OrthogonalTiledMapRenderer(map);
     }
