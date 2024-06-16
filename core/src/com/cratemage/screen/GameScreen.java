@@ -1,6 +1,7 @@
 package com.cratemage.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -127,6 +128,11 @@ public class GameScreen implements Screen {
         }
         game.camera.update();
         hud.update(dt);
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+            game.setScreen(new GameScreen(game));
+        }
+
     }
 
     @Override
