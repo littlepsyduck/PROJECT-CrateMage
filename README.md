@@ -47,6 +47,7 @@ At the end of each week, team merges `develop` into `main` to release a new vers
 - **Level Progression:** Advance through increasingly difficult levels, each designed with unique challenges and requiring innovative solutions.
 - **Puzzle Mechanics:** Players must manipulate crates to navigate through levels and reach goals.
 - **Time Clock:** A stopwatch will be activated at the start of the level and show the time when the player reaches goal.
+- **Speed Ranking:** A ranking based on shortest completion time will appear each time the player completes a level. 
 
 ## 4. Technology
 
@@ -88,10 +89,6 @@ Explanation:
 - **desktop:** Contains platform-specific classes for running the game on different platforms.
 
 
-
-
-
-
 ## 5. Demo Images and Videos
 
 **Demo Images:**
@@ -107,32 +104,44 @@ Explanation:
 
 ## 6. Issues Encountered
 
-### Issue 1: [Mô tả vấn đề]
-**Ví dụ:** Game gặp phải vấn đề hiệu năng kém, fps thấp dù không có nhiều đối tượng trên màn hình
+### Issue 1: Difficulty working in groups with Git
 
 ### Actions Taken to Resolve
 
-**Solution:** Do việc tạo object quá nhiều, nên dẫn tới tràn ram và giảm hiệu năng
-- Sử dụng Design Pattern Object Pool để tái sử dụng object. Khi object không còn sử dụng, sẽ được đưa vào pool để sử dụng lại.
+**Solution:** Team members learn how to use Git on their own, leading to conflicts and misunderstandings at several steps.
+- Discuss with the whole team to resolve conflicts and become more proficient in Git.
 
 ### Result
 
-- Sau khi sử dụng Object Pool, hiệu năng game đã được cải thiện, fps tăng lên đáng kể. Từ *30fps lên 60fps* (Rõ ràng hơn với số liệu cụ thể)
+- After the first 1 or 2 weeks, which were quite clumsy, Git and GitHub followed a more consistent flow.
 
-### Issue 2: [Mô tả vấn đề]
-**Ví dụ:** Game gặp phải vấn đề hiệu năng kém, fps thấp dù không có nhiều đối tượng trên màn hình
+### Issue 2: Handles interactions between character and crates
 
 ### Actions Taken to Resolve
 
-**Solution:** Do việc tạo object quá nhiều, nên dẫn tới tràn ram và giảm hiệu năng
-- Sử dụng Design Pattern Object Pool để tái sử dụng object. Khi object không còn sử dụng, sẽ được đưa vào pool để sử dụng lại.
+**Solution:** The game cannot be played in a horizontal perspective, so gravity cannot be placed top-down.
+- Implement the MyContactListener class to handle collisions between character and crates.
 
 ### Result
 
-- Sau khi sử dụng Object Pool, hiệu năng game đã được cải thiện, fps tăng lên đáng kể. Từ *30fps lên 60fps* (Rõ ràng hơn với số liệu cụ thể)
+- There was an error where the crate was pushed and couldn't stop, but it was later fixed.
+
+## Issue 3: Handles interactions between crates 
+
+### Actions Taken to Resolve
+
+**Solution:** The group had difficulty determining the event of selecting 2 crates so that they could then control the two crates to move together.
+- The group tried to research and ask for advice from mentors.
+
+### Result
+
+- The problem has not been fixed. But our team came up with an alternative solution that doesn't need to use the mouse click event.
+- We will number the crates and display them so players can press the key to select the two crates they want to link.
 
 ## 7. Conclusion
 
-**Achieved Results:** [Mô tả kết quả đạt được sau khi giải quyết các vấn đề]
+**Achieved Results:** The game has completed most of the basic functions, and can operate normally. This is also our group's first product, and also our first group product, so it may not be complete yet. 
 
-**Future Development Direction:** [Mô tả hướng phát triển tiếp theo của dự án]
+**Future Development Direction:** 
+- There are still some features that can be improved, such as interaction between crates.
+- Some traps and interacts with doors as well as with other crates.

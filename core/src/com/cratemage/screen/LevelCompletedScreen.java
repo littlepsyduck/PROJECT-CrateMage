@@ -104,12 +104,12 @@ public class LevelCompletedScreen implements Screen {
                return o1.compareTo(o2);
             }
         });
-        int posX = 870, posY = 380;
+        int posX = 820, posY = 350;
         for (int i = 0; i < min(3, timePassLevel.size()); i++){
             rank[i] = new Label(timePassLevel.get(i), labelStyle);
             rank[i].setPosition(posX, posY);
             rank[i].setFontScale(0.7f);
-            rank[i].setColor(Color.BLACK);
+            rank[i].setColor(Color.DARK_GRAY);
             posY -= 60;
 
             stage.addActor(rank[i]);
