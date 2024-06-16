@@ -17,6 +17,11 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.cratemage.CrateMage;
 import com.cratemage.controller.ButtonManager;
+import com.cratemage.controller.DataProcess;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 public class LevelCompletedScreen implements Screen {
     public CrateMage game;
@@ -27,6 +32,9 @@ public class LevelCompletedScreen implements Screen {
     Skin next, reset;
     public Label timeLabel, getTime;
     Texture levelComplete;
+    BitmapFont customFont;
+    Label.LabelStyle labelStyle;
+    DataProcess dataProcess = new DataProcess();
 
     public LevelCompletedScreen(CrateMage game) {
         this.game = game;
@@ -34,8 +42,8 @@ public class LevelCompletedScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
         batch = (SpriteBatch) stage.getBatch();
 
-        BitmapFont customFont = new BitmapFont(Gdx.files.internal("levelPass/myfont.fnt"));
-        Label.LabelStyle labelStyle = new Label.LabelStyle(customFont, Color.WHITE);
+        customFont = new BitmapFont(Gdx.files.internal("PassLevel/myfont.fnt"));
+        labelStyle = new Label.LabelStyle(customFont, Color.WHITE);
 
         buttonManager = new ButtonManager(game);
         Button home = buttonManager.createHomeButton();
@@ -81,6 +89,30 @@ public class LevelCompletedScreen implements Screen {
         stage.addActor(home);
         stage.addActor(sound);
         stage.addActor(menu);
+
+        createRankLabel();
+    }
+
+    public void createRankLabel() {
+        Label[] rank = new Label[3];
+        List<String> timePassLevel = dataProcess.readTimePassLevel(game.levelCurrent);
+        timePassLevel.sort(new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+               return o1.compareTo(o2);
+            }
+        });
+        int posX = 870, posY = 380;
+        for (int i = 0; i < 3; i++){
+            rank[i] = new Label(timePassLevel.get(i), labelStyle);
+            rank[i].setPosition(posX, posY);
+            rank[i].setFontScale(0.7f);
+            rank[i].setColor(Color.BLACK);
+            posY -= 60;
+
+            stage.addActor(rank[i]);
+        }
+
     }
 
     @Override

@@ -25,7 +25,8 @@ public class Login implements Screen {
     private Skin submitskin;
     private Skin textSkin;
     private Music clickSound;
-    public String namePlayer;
+    public Button submitButton;
+    TextField nameText;
 
     public Login(CrateMage game) {
         this.game = game;
@@ -35,10 +36,10 @@ public class Login implements Screen {
         this.textSkin = new Skin(Gdx.files.internal("Login/nameText.json"));
         this.clickSound = Gdx.audio.newMusic(Gdx.files.internal("Sound/MouseClick.mp3")); // Đảm bảo âm thanh được khởi tạo
 
-        Button submitButton = createSubmitButton();
+        submitButton = createSubmitButton();
         stage.addActor(submitButton); // Thêm button vào stage
 
-        TextField nameText = createNameText();
+        nameText = createNameText();
         stage.addActor(nameText);
     }
 
@@ -53,6 +54,8 @@ public class Login implements Screen {
                 if (game.isSoundOn()) {
                     clickSound.play();
                 }
+                game.namePlayer = nameText.getText();
+//                System.out.println(nameText.getText());
                 game.setScreen(new LevelSelectScreen(game));
             }
         });

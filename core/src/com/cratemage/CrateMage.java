@@ -17,6 +17,7 @@ public class CrateMage extends Game {
 	private Music mainMusic;
 	private boolean isSoundOn = true; // Add this line
 	public int levelCurrent = 1, levelUnlocked = 1;
+	public String namePlayer;
 
 	@Override
 	public void create() {
