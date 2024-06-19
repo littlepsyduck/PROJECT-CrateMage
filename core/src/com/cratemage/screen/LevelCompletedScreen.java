@@ -36,6 +36,7 @@ public class LevelCompletedScreen implements Screen {
     Texture levelComplete;
     BitmapFont customFont;
     Label.LabelStyle labelStyle;
+    Texture background;
     DataProcess dataProcess = new DataProcess();
 
     public LevelCompletedScreen(CrateMage game) {
@@ -53,6 +54,7 @@ public class LevelCompletedScreen implements Screen {
         Button sound = buttonManager.createMusicButton();
 
         levelComplete = new Texture("levelPass/levelComplete.png");
+        background = new Texture("levelPass/backgrendgame.png");
 
         timeLabel = new Label("TIME ", labelStyle);
         getTime = new Label(String.format("%03d", game.time), labelStyle);
@@ -128,7 +130,6 @@ public class LevelCompletedScreen implements Screen {
         ScreenUtils.clear(1, 1, 1, 0);
 
         batch.begin();
-        Texture background = new Texture("levelPass/backgrendgame.png");
         batch.draw(background, 0, 0, 1280, 720);
         int width = 800;
         int height = 530;
