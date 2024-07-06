@@ -18,7 +18,7 @@ public class Box extends Sprite {
     boolean contact = false;
     public Box(GameScreen screen, Body body) {
         this.world = screen.world;
-        texture = new Texture("Map/box.png");
+        texture = new Texture("Map/mini_box_9.png");
         setRegion(texture);
         setBounds(body.getPosition().x,body.getPosition().y,20/PPM, 20/PPM);
         this.body = body;
