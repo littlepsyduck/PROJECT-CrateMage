@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="91">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="98">
  <tileset firstgid="1" name="Dungeon_Tileset" tilewidth="16" tileheight="16" tilecount="100" columns="10">
   <image source="Dungeon_Tileset.png" width="160" height="160"/>
  </tileset>
@@ -76,14 +76,14 @@
   <object id="73" x="192.5" y="96">
    <polygon points="0,0 271.5,0 271.5,-16 -0.5,-16 -0.5,0"/>
   </object>
-  <object id="74" x="192" y="112">
-   <polygon points="0,0 160,0 160,16 0,16"/>
+  <object id="74" x="192" y="113">
+   <polygon points="0,0 160,0 160,15 0,15"/>
   </object>
   <object id="75" x="464" y="81">
    <polygon points="0,0 16,-1 16,239 0,239"/>
   </object>
-  <object id="76" x="352.5" y="112.5">
-   <polygon points="0,0 -0.5,95.5 -16.5,95.5 -16.5,-0.5"/>
+  <object id="76" x="351" y="113.495">
+   <polygon points="0,0 -0.454545,94.5052 -15,94.5052 -15,-0.494792"/>
   </object>
   <object id="77" x="346" y="192.5">
    <polygon points="0,0 102,-0.5 102,15.5 6,15.5 -10,15.5 -10,-0.5"/>
@@ -99,9 +99,16 @@
   </object>
   <object id="85" name="player" x="66.5833" y="130.583" width="10.8333" height="10.8333"/>
   <object id="87" name="goal" x="394.167" y="287.583" width="13.6667" height="17.3333"/>
-  <object id="88" name="box" x="178.25" y="98" width="10.5" height="11"/>
-  <object id="89" name="box" x="354.75" y="98" width="10.5" height="11"/>
-  <object id="90" name="box" x="434.75" y="162" width="10.5" height="11"/>
+  <object id="88" name="box0" x="98.75" y="114" width="10.5" height="11"/>
+  <object id="89" name="box1" x="196.25" y="98.5" width="10.5" height="11"/>
+  <object id="90" name="box2" x="259.75" y="99" width="10.5" height="11"/>
+  <object id="91" name="box3" x="338.75" y="99" width="10.5" height="11"/>
+  <object id="92" name="box4" x="371.25" y="99.75" width="10.5" height="11"/>
+  <object id="93" name="box5" x="386.75" y="99.5" width="10.5" height="11"/>
+  <object id="94" name="box6" x="403" y="99.5" width="10.5" height="11"/>
+  <object id="95" name="box7" x="418.75" y="99.5" width="10.5" height="11"/>
+  <object id="96" name="box8" x="435.25" y="99.25" width="10.5" height="11"/>
+  <object id="97" name="box9" x="450.25" y="99" width="10.5" height="11"/>
  </objectgroup>
  <layer id="7" name="Tile Layer 3" width="40" height="23">
   <data encoding="csv">

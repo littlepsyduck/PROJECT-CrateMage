@@ -133,8 +133,8 @@
   <object id="61" x="288.5" y="96">
    <polygon points="0,0 -16.5,0 -16.5,96 -0.5,96"/>
   </object>
-  <object id="62" name="box2" x="227.03" y="275.247" width="10.5" height="11"/>
-  <object id="63" name="box3" x="260.209" y="276.247" width="10.5" height="11"/>
+  <object id="62" name="box2" x="195.53" y="258.247" width="10.5" height="11"/>
+  <object id="63" name="box3" x="307.209" y="274.247" width="10.5" height="11"/>
   <object id="64" x="481.5" y="289">
    <polygon points="0,0 46.5,0 46.5,31 -1.5,31 -1.5,0"/>
   </object>
@@ -142,7 +142,7 @@
    <polygon points="0,0 31.3333,0.666667 31.3333,-79.3333 -0.666667,-79.3333"/>
   </object>
   <object id="67" name="goal" x="524" y="272" width="13.6667" height="17.3333"/>
-  <object id="68" name="box4" x="371.477" y="274.571" width="10.5" height="11"/>
+  <object id="68" name="box4" x="466.477" y="274.571" width="10.5" height="11"/>
  </objectgroup>
  <layer id="4" name="Tile Layer 3" width="40" height="23">
   <data encoding="csv">
