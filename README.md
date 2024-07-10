@@ -163,12 +163,18 @@ Explanation:
 ## 8. Latest Updates
 
 *10/07/2024*
+
 **Bug Fixes:** 
-- Fixed an issue where crates in the map were not numbered correctly. 
+
+- Fixed an issue where crates in the map were not numbered correctly.
+
 **New Feature: Interactions Between Crates**
+  
 - We've added the ability to enter numbers from the keyboard to connect two crates and move them in opposite directions.
 - We have also updated maps 1, 2, and 3 to accommodate new features. The next maps are being developed.
 
 *06/07/2024*
+
 **Images:**
+
 - Update new box images numbered from 0 to 9.
