@@ -1,6 +1,6 @@
 # CrateMage - ProGameCup
 
-> ProGameCup is a competition hosted by ProPTIT. After OOP Course for club member in ProPTIT, we will have a competition to test our knowledge and skills. This competition is a good chance for us to improve our coding skills and learn from each other.
+> ProGameCup is a competition hosted by ProPTIT. After the OOP Course for club members in ProPTIT, we will have a competition to test our knowledge and skills. This competition is a good chance for us to improve our coding skills and learn from each other.
 
 ## 1. Group Information
 
@@ -19,14 +19,14 @@
 
 ### Working Model
 
-Team operates using the Scrum model and utilizes Linear to manage tasks. All tasks are meticulously tracked on Linear.
+Our team operates using the Scrum model and utilizes Linear to manage tasks. All tasks are meticulously tracked on Linear.
 - Tracking: [Linear Link](https://linear.app/bdtproptit/team/NHOM4/all)
 
-Each week, team meets to review completed work, collaboratively solve issues, and propose solutions for the upcoming week. This is followed by a demo session with the mentor to receive feedback and guidance.
+Each week, our team meets to review completed work, collaboratively solve issues, and propose solutions for the upcoming week. This is followed by a demo session with the mentor to receive feedback and guidance.
 
 ### Version Control Strategy
 
-Team uses Gitflow to manage code. Each member creates a branch from `develop` for their work, naming the branches using the format `feature/feature-name`. Upon completion, a Pull Request is created for code review and then merged into `develop`.
+The team uses Gitflow to manage code. Each member creates a branch from `develop` for their work, naming the branches using the format `feature/feature-name`. Upon completion, a Pull Request is created for code review and then merged into `develop`.
 - Main branches:
     - `main`: Contains stable code that has been thoroughly tested and reviewed.
     - `develop`: Contains the latest code that has passed review and testing.
@@ -34,7 +34,7 @@ Team uses Gitflow to manage code. Each member creates a branch from `develop` fo
 
 ![alt text](images/image.png)
 
-At the end of each week, team merges `develop` into `main` to release a new version.
+At the end of each week,  team merges `develop` into `main` to release a new version.
 
 
 
@@ -46,8 +46,8 @@ At the end of each week, team merges `develop` into `main` to release a new vers
 
 - **Level Progression:** Advance through increasingly difficult levels, each designed with unique challenges and requiring innovative solutions.
 - **Puzzle Mechanics:** Players must manipulate crates to navigate through levels and reach goals.
-- **Time Clock:** A stopwatch will be activated at the start of the level and show the time when the player reaches goal.
-- **Speed Ranking:** A ranking based on shortest completion time will appear each time the player completes a level. 
+- **Time Clock:** A stopwatch will be activated at the start of the level and show the time when the player reaches the goal.
+- **Speed Ranking:** A ranking based on the shortest completion time will appear each time the player completes a level. 
 
 ## 4. Technology
 
@@ -121,18 +121,18 @@ Explanation:
 ### Actions Taken to Resolve
 
 **Solution:** Team members learn how to use Git on their own, leading to conflicts and misunderstandings at several steps.
-- Discuss with the whole team to resolve conflicts and become more proficient in Git.
+- Discuss with teammates to resolve conflicts and become more proficient in Git.
 
 ### Result
 
 - After the first 1 or 2 weeks, which were quite clumsy, Git and GitHub followed a more consistent flow.
 
-### Issue 2: Handles interactions between character and crates
+### Issue 2: Handles interactions between characters and crates
 
 ### Actions Taken to Resolve
 
 **Solution:** The game cannot be played in a horizontal perspective, so gravity cannot be placed top-down.
-- Implement the MyContactListener class to handle collisions between character and crates.
+- Implement the MyContactListener class to handle collisions between characters and crates.
 
 ### Result
 
@@ -147,15 +147,34 @@ Explanation:
 
 ### Result
 
-- The problem has not been fixed. But our team came up with an alternative solution that doesn't need to use the mouse click event.
-- We will number the crates and display them so players can press the key to select the two crates they want to link.
+- The problem has not been fixed. However, our team came up with an alternative solution that doesn't need to use the mouse click event.
+- We will number and display the crates so players can press the key to select the two crates they want to link.
 
 ## 7. Conclusion
 
 **Achieved Results:** 
-- The game has completed most of the basic functions, and can operate normally.
+- The game has completed most basic functions and can operate normally.
 - This is also our group's first product, and also our first group product, so it may not be complete yet. 
 
 **Future Development Direction:** 
-- There are still some features that can be improved, such as interaction between crates.
+- Some features can still be improved, such as interaction between crates.
 - Some traps and interacts with doors as well as with other crates.
+
+## 8. Latest Updates
+
+*10/07/2024*
+
+**Bug Fixes:** 
+
+- Fixed an issue where crates in the map were not numbered correctly.
+
+**New Feature: Interactions Between Crates**
+  
+- We've added the ability to enter numbers from the keyboard to connect two crates and move them in opposite directions.
+- We have also updated maps 1, 2, and 3 to accommodate new features. The next maps are being developed.
+
+*06/07/2024*
+
+**Images:**
+
+- Update new box images numbered from 0 to 9.
