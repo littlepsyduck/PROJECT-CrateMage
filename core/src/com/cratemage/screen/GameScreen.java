@@ -30,6 +30,7 @@ import java.util.ArrayList;
 
 import static com.cratemage.common.constant.GameConstant.*;
 import static java.lang.Integer.max;
+import static java.lang.Math.min;
 
 public class GameScreen implements Screen {
     public float stateTime;
@@ -126,6 +127,14 @@ public class GameScreen implements Screen {
         for (Box box : boxes) {
             box.update(dt);
         }
+        int numpadPressed = Input.Keys.NUMPAD_0;
+        int numPress = Input.Keys.NUM_0;
+        for(int i = 0; i <= min(9, boxes.size() - 1); i++){
+            if(Gdx.input.isKeyJustPressed(numPress + i) || Gdx.input.isKeyJustPressed(numpadPressed + i)){
+                boxes.get(i).setChoose(!boxes.get(i).isChoose());
+            }
+        }
+
         game.camera.update();
         hud.update(dt);
 

@@ -7,7 +7,9 @@ import com.cratemage.model.Goal;
 import com.cratemage.model.Player;
 import com.cratemage.screen.LevelCompletedScreen;
 
+import java.lang.management.BufferPoolMXBean;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MyContactListener implements ContactListener {
     public ArrayList<Box> boxes;
@@ -32,14 +34,21 @@ public class MyContactListener implements ContactListener {
         for(Box box : boxes){
             if(fixtureA.getBody() == box.body && fixtureB.getBody() == box.body) return;
             if(fixtureA.getBody() == box.body || fixtureB.getBody() == box.body){
-                //System.out.println("has hit");
-                box.checkInput();
+                if(box.isChoose()){
+                    for(Box box1: boxes){
+                        if(box1.isChoose() && box1 != box){
+                            box.checkInput2(box1);
+                        }
+                    }
+                }
+                else box.checkInput();
                 return;
             }
-            if((fixtureA.getBody() == goal.body && fixtureB.getBody() == player.body) || (fixtureB.getBody() == goal.body && fixtureA.getBody() == player.body)){
-                completed = true;
-                return;
-            }
+        }
+
+        if((fixtureA.getBody() == goal.body && fixtureB.getBody() == player.body) || (fixtureB.getBody() == goal.body && fixtureA.getBody() == player.body)){
+            completed = true;
+            return;
         }
     }
 
@@ -49,8 +58,16 @@ public class MyContactListener implements ContactListener {
         Fixture fixtureB = contact.getFixtureB();
         for(Box box : boxes){
             if(fixtureA.getBody() == box.body || fixtureB.getBody() == box.body){
-                box.body.setLinearVelocity(0, 0);
-                break;
+                if(box.isChoose()){
+                    for(Box box1: boxes){
+                        if(box1.isChoose() && box1 != box){
+                            box1.body.setLinearVelocity(0, 0);
+                            box.body.setLinearVelocity(0, 0);
+                        }
+                    }
+                }
+                else box.body.setLinearVelocity(0, 0);
+                return;
             }
         }
     }

@@ -1,9 +1,0 @@
-{
-com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
-	default: {
-		up: box
-		down: boxActive
-		over: box
-	}
-}
-}

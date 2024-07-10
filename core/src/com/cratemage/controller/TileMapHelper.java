@@ -59,7 +59,7 @@ public class TileMapHelper {
                     );
                     gameScreen.player = new Player(gameScreen, body);
                 }
-                if(rectangleName.equals("box")){
+                if(rectangleName.contains("box")){
                     Body body = BodyHelperService.createBody(
                             rectangle.getX() + rectangle.getWidth() / 2,
                             rectangle.getY() + rectangle.getHeight() / 2,
@@ -69,7 +69,8 @@ public class TileMapHelper {
                             gameScreen.world,
                             5
                     );
-                    gameScreen.boxes.add(new Box(gameScreen, body));
+                    char idx = rectangleName.charAt(3);
+                    gameScreen.boxes.add(new Box(gameScreen, body, idx));
                 }
                 if(rectangleName.equals("goal")){
                     Body body = BodyHelperService.createBody(
